@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://chlvn8kun8qsi"]
+
+[ext_resource type="PackedScene" uid="uid://dk1icq00ywlv" path="res://perla.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bb37o7ptw7iq" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bj50ma1pyblhf" path="res://player.tscn" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://diwl5cmy1d8vm" path="res://spawner.gd" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://d02ivg855pje4" path="res://sonidos/gentle-ocean-waves-birdsong-and-gull-7109.mp3" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://lve03kidiqkh" path="res://img/aguaSola.png" id="6_7mycd"]
+
+[sub_resource type="FontFile" id="FontFile_h2yge"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_h2yge")
+
+[node name="Player" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(44, 81)
+
+[node name="Perla" parent="." instance=ExtResource("1_0xm2m")]
+position = Vector2(145, 119)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_left = 1045.0
+offset_top = 17.0
+offset_right = 1117.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0.0393626, 0.338, 1)
+theme_override_fonts/font = SubResource("FontFile_h2yge")
+text = "Puntos: 0"
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("4_1bvp3")
+perla_scene = ExtResource("1_0xm2m")
+area_min = Vector2(0, 100)
+area_max = Vector2(800, 400)
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Fondo" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(578, 328)
+scale = Vector2(2.00868, 2.00617)
+texture = ExtResource("6_7mycd")

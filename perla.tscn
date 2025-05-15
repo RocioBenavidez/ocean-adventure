@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk1icq00ywlv"]
+
+[ext_resource type="Script" uid="uid://dxrxognmrap1r" path="res://perla.gd" id="1_mdid8"]
+[ext_resource type="Texture2D" uid="uid://diw8v47hg2cbx" path="res://img/perla.png" id="1_ocawx"]
+[ext_resource type="AudioStream" uid="uid://bjuvr34bc045s" path="res://sonidos/bubble-254777.mp3" id="3_i7h7d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdid8"]
+radius = 15.0333
+
+[node name="Perla" type="Area2D"]
+script = ExtResource("1_mdid8")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ocawx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_mdid8")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i7h7d")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
