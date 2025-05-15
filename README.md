@@ -7,7 +7,7 @@
 ## 🎮 Cómo jugar
 
 * `A / D` o `← / →`: Mover al pez a izquierda y derecha.
-*  - `W / S` o `↑ / ↓`: Mover al pez hacia arriba y abajo.
+*  `W / S` o `↑ / ↓`: Mover al pez hacia arriba y abajo.
 * Recolectá perlas para sumar puntos.
 * ¡Explorá el fondo marino y sumá la mayor cantidad posible!
 
