@@ -15,8 +15,8 @@
 
 ## 📸 Captura de pantalla
 
-![![Captura de pantalla 2025-07-01 205324](https://github.com/user-attachments/assets/30b85430-1d8f-4fde-8cc2-5317304b2dc9)
-)
+[![Captura de pantalla 2025-07-01 205324](https://github.com/user-attachments/assets/30b85430-1d8f-4fde-8cc2-5317304b2dc9)
+
 
 
 ---
