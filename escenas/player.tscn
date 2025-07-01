@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj50ma1pyblhf"]
+
+[ext_resource type="Script" uid="uid://btitwcqpjr56e" path="res://escenas/player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://wnn3vee0sww4" path="res://img/pez.png" id="2_onrkg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3pqv"]
+radius = 16.0299
+height = 126.048
+
+[sub_resource type="Animation" id="Animation_onrkg"]
+resource_name = "aletas_movimiento"
+loop_mode = 1
+step = 1.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3pqv"]
+_data = {
+&"aletas_movimiento": SubResource("Animation_onrkg")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_4flbx")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(457, 265)
+rotation = -0.000441388
+scale = Vector2(0.121247, 0.0997987)
+texture = ExtResource("2_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(442, 266)
+rotation = -1.5868
+shape = SubResource("CapsuleShape2D_i3pqv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i3pqv")
+}

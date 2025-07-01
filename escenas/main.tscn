@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://chlvn8kun8qsi"]
+[gd_scene load_steps=9 format=3 uid="uid://chlvn8kun8qsi"]
 
-[ext_resource type="PackedScene" uid="uid://dk1icq00ywlv" path="res://perla.tscn" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://bb37o7ptw7iq" path="res://main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bj50ma1pyblhf" path="res://player.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dk1icq00ywlv" path="res://escenas/perla.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bb37o7ptw7iq" path="res://escenas/main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bj50ma1pyblhf" path="res://escenas/player.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://diwl5cmy1d8vm" path="res://spawner.gd" id="4_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://d02ivg855pje4" path="res://sonidos/gentle-ocean-waves-birdsong-and-gull-7109.mp3" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://lve03kidiqkh" path="res://img/aguaSola.png" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://b241jkpsu1dia" path="res://escenas/coral.tscn" id="7_272bh"]
 
 [sub_resource type="FontFile" id="FontFile_h2yge"]
 cache/0/16/0/ascent = 0.0
@@ -49,3 +50,9 @@ stream = ExtResource("5_lquwl")
 position = Vector2(578, 328)
 scale = Vector2(2.00868, 2.00617)
 texture = ExtResource("6_7mycd")
+
+[node name="coralBody" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(290, 493)
+
+[node name="coralBody2" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(865, 494)

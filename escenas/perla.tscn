@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dk1icq00ywlv"]
 
-[ext_resource type="Script" uid="uid://dxrxognmrap1r" path="res://perla.gd" id="1_mdid8"]
+[ext_resource type="Script" uid="uid://dxrxognmrap1r" path="res://escenas/perla.gd" id="1_mdid8"]
 [ext_resource type="Texture2D" uid="uid://diw8v47hg2cbx" path="res://img/perla.png" id="1_ocawx"]
 [ext_resource type="AudioStream" uid="uid://bjuvr34bc045s" path="res://sonidos/bubble-254777.mp3" id="3_i7h7d"]
 
