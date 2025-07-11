@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dk1icq00ywlv" path="res://escenas/perla.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bb37o7ptw7iq" path="res://escenas/main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bj50ma1pyblhf" path="res://escenas/player.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bj50ma1pyblhf" path="res://assets/player/player.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://diwl5cmy1d8vm" path="res://spawner.gd" id="4_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://d02ivg855pje4" path="res://sonidos/gentle-ocean-waves-birdsong-and-gull-7109.mp3" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://lve03kidiqkh" path="res://img/aguaSola.png" id="6_7mycd"]
