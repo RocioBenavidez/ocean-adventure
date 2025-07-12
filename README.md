@@ -1,6 +1,6 @@
 # 🌊 Ocean Adventure
 
-**Ocean Adventure** es un juego 2D desarrollado en **Godot 4**, donde controlás a un pez que recorre el fondo del océano, recolectando perlas y evitando obstáculos en una aventura submarina con sistema de puntaje.
+**Ocean Adventure** es un juego 2D desarrollado en Godot 4, donde controlás a un pez que recorre las profundidades del océano en busca de alimento y supervivencia, esquivando obstáculos y enfrentando los peligros de un ecosistema contaminado.
 
 ---
 
@@ -8,8 +8,10 @@
 
 * `A / D` o `← / →`: Mover al pez a izquierda y derecha.
 *  `W / S` o `↑ / ↓`: Mover al pez hacia arriba y abajo.
-* Recolectá perlas para sumar puntos.
-* ¡Explorá el fondo marino y sumá la mayor cantidad posible!
+*Comé peces más pequeños para ganar energía.
+*Esquivá contaminantes y depredadores.
+*Recolectá ítems especiales para restaurar vida.
+*¡Explorá, sobreviví y superá tu récord!
 
 ---
 
@@ -30,8 +32,8 @@
 
 ## 🎵 Créditos
 
-* **Sonidos**: [pixabay](https://pixabay.com/)
-* **Gráficos**: [OpenGameArt.org](https://opengameart.org/)
+* **Sonidos**: En proceso
+* **Gráficos**: En proceso
 
 ---
 
