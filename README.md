@@ -31,13 +31,10 @@
 ---
 
 ## 📸 Capturas de pantalla
+
 Menú principal
-<img src="https://raw.githubusercontent.com/TU_USUARIO/ocean-adventure/main/assets/menu-principal.png" alt="Menú principal de Ocean Adventure" width="600"/>
-
-
-Gameplay
 <img width="1152" height="648" alt="Captura de pantalla" src="https://github.com/user-attachments/assets/227fa77d-6874-4ed1-94de-b1362816b273" />
-
+Gameplay
 ![Captura de pantalla 2025-07-01 205324](https://github.com/user-attachments/assets/30b85430-1d8f-4fde-8cc2-5317304b2dc9)
 
 ---
