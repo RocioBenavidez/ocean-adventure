@@ -46,3 +46,5 @@ libraries = {
 position = Vector2(465, 266)
 rotation = -1.59445
 shape = SubResource("CapsuleShape2D_h6syq")
+
+[node name="playerSalud" type="Node2D" parent="."]
