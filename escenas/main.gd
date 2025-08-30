@@ -1,18 +1,24 @@
 extends Node2D
 
 var score = 0
+var timerGame
+@onready var hud = $HUD
 
 func _ready():
-	update_score_label()
+	hud.update_score(score)
 	$MusicaFondo.play()
+	
+	timerGame = preload("res://escenas/timerGame.tscn").instantiate()
+	add_child(timerGame)
+	timerGame.stop_timer()
 
 func increase_score():
 	score += 1
-	update_score_label()
+	hud.update_score(score)
 
-func update_score_label():
-	$CanvasLayer/ScoreLabel.text = "Puntos: %s" % score
-
+func increase_score():
+	score +=1
+	hud.update_score(score)
 
 func _on_perla_collected():
 	increase_score()
