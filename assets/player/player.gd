@@ -1,11 +1,12 @@
 extends CharacterBody2D
+signal health_changed(vida)
 @export var speed: float = 300
 @export var vida: int = 100
 @export var energia: int = 0
 
 func _ready():
 	$Area2D.connect("area_entered",Callable(self,"_on_area_entered"))
-
+	
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 
@@ -37,8 +38,8 @@ func _on_area_entered(area):
 	
 func quitar_vida(cantidad: int):
 	vida -= cantidad
-	print("Vida actual: %d" % vida)
-	
+	emit_signal("health_changed", vida)
+	print("Vida actual",vida)
 	if vida <= 0:
 		morir()
 
@@ -46,5 +47,7 @@ func consumir_comida(food : int):
 	energia += food
 	print("Comiste algo. Energía actual: %d" % energia)
 	
+
+
 func  morir():
 	print("El jugador ha muerto.")
