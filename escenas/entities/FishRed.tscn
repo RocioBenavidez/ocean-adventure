@@ -15,7 +15,7 @@ height = 195.939
 position = Vector2(77, 46)
 script = ExtResource("1_bio5m")
 speed = 200.0
-damage = 1
+damage = 30
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
