@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqlpleei3mxfv"]
+[gd_scene load_steps=3 format=3 uid="uid://by0umccm5d75n"]
 
 [ext_resource type="Script" uid="uid://ddlg6tmxfusan" path="res://scripts/HUB/timerGame.gd" id="1_8qfop"]
 [ext_resource type="Texture2D" uid="uid://bjr62ylv4cbm4" path="res://assets/ui/bgClock.png" id="2_7817e"]
