@@ -1,46 +1,45 @@
 extends CanvasLayer
 
 @onready var health_bar: TextureProgressBar = $HealthBar
-@onready var score_label = $ScoreLabel
-
+@onready var time_bar: TextureProgressBar = $EnergyBar
+@export var tiempo_inicial: int = 60
+var tiempo_restante: int = tiempo_inicial
 
 func set_health(value: int):
 	health_bar.value = value
 
-func update_score(value: int):
-	score_label.text = "Puntos: %s" % value
+func set_time(value: int):
+	time_bar.value = value
 
 func _ready():
-	# Busca el primer nodo en el grupo "player"
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
-		var player = players[0]  # en tu juego seguramente haya solo 1
+		var player = players[0]  
 		player.connect("health_changed", Callable(self, "_on_player_health_changed"))
-		set_health(player.vida)  # inicializar la barra
+		player.connect("time_changed", Callable(self, "_on_player_time_changed"))
+		set_health(player.vida)
 		
+		set_time(player.tiempo)
 	else:
 		print("⚠️ No se encontró ningún nodo en el grupo 'player'")
 		
-	var timer_node = get_node("/root/HUB/timerGame")  # Asegúrate de tener la ruta correcta
-	if timer_node:
-		timer_node.connect("timer_updated", Callable(self, "_on_timer_updated"))
-		
-	else:
-		print("⚠️ No se encontró el nodo de cronómetro.")
-		
+	$Timer.star()
 
-
-func _on_player_health_changed(value):
+func _on_player_health_changed(value: int):
 	set_health(value)
 
-func _on_timer_updated(minutes, seconds, msec, puntos):
-	# Actualiza el texto del cronómetro
-	$Minutes2.text = "%02d" % minutes
-	$Seconds2.text = "%02d" % seconds
-	$Msecs2.text = "%03d" % msec
+func _on_player_time_changed(value: int):
+	set_time(value)
+
+func _on_timer_timeout():
+	tiempo_restante -= 1
+	set_time(tiempo_restante)
+	if tiempo_restante <= 0:
+		game_over("Se te acabó en tiempo")
 	
-	# Actualiza los puntos
+func _on_level_up(extra_time: int):
+	tiempo_restante = tiempo_inicial + extra_time
+	set_time(tiempo_restante)
 
-
-func _on_timer_game_ready() -> void:
-	pass # Replace with function body.
+func game_over(reason: String):
+	print(reason)
