@@ -1,9 +1,13 @@
 extends CharacterBody2D
+
 signal health_changed(vida)
+signal comer_comida(tiempo_extra)
+
 @export var speed: float = 300
 @export var vida: int = 100
 @export var energia: int = 0
 @onready var animated_sprite: AnimatedSprite2D = $AnimateSprite
+
 
 func _ready():
 	$Area2D.connect("area_entered",Callable(self,"_on_area_entered"))
@@ -27,11 +31,14 @@ func _physics_process(delta):
 	if velocity.x != 0:
 		$AnimateSprite.flip_h = velocity.x < 0
 
+func consumir_comida(food: int):
+	emit_signal("time_changed", food)  # HUD recibirá esto y sumará tiempo
+	print("Comiste algo. Se agregó tiempo extra: %d" % food)
+	animated_sprite.play("comiendo")
 
 func _on_area_entered(area):
-	
 	if area is Food:
-		consumir_comida(area.nutricion)
+		emit_signal("comer_comida", area.bonus)
 		area.queue_free()
 		return
 	
@@ -47,12 +54,7 @@ func quitar_vida(cantidad: int):
 	animated_sprite.play("atontado")
 	if vida <= 0:
 		morir()
-	
 
-func consumir_comida(food : int):
-	energia += food
-	print("Comiste algo. Energía actual: %d" % energia)
-	animated_sprite.play("comiendo")
 	
 func  morir():
 	print("El jugador ha muerto.")
