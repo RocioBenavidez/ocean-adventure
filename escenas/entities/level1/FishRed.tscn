@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6p0a80mtdxs4"]
+
+[ext_resource type="Script" uid="uid://cfi4177bxu4en" path="res://scripts/entities/fish_red.gd" id="1_bio5m"]
+[ext_resource type="Texture2D" uid="uid://cxklda4nxyr5m" path="res://assets/obstacle/tiburonGris.png" id="2_iq6r4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7p8k"]
+radius = 22.9823
+height = 259.906
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bio5m"]
+radius = 18.9458
+height = 268.043
+
+[node name="FishRed" type="Node2D"]
+position = Vector2(140, 84)
+script = ExtResource("1_bio5m")
+speed = 200.0
+damage = 30
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(721.155, 268.604)
+scale = Vector2(0.356826, 0.280399)
+texture = ExtResource("2_iq6r4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(707, 264)
+rotation = 1.56234
+shape = SubResource("CapsuleShape2D_e7p8k")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(714, 267)
+rotation = 1.56189
+shape = SubResource("CapsuleShape2D_bio5m")
