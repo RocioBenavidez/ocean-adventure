@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddfoh24u0jkp6"]
+
+[ext_resource type="Script" uid="uid://5mfok6rk2wfl" path="res://escenas/entities/level2/floating_trash.gd" id="1_2vabc"]
+[ext_resource type="Texture2D" uid="uid://cvy6ryr26jb64" path="res://assets/obstacle/Bolsa.png" id="2_0fe6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fe6t"]
+size = Vector2(38, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcrea"]
+size = Vector2(37, 53)
+
+[node name="FloatingTrash" type="Node2D"]
+script = ExtResource("1_2vabc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(322, 45)
+scale = Vector2(0.141935, 0.150442)
+texture = ExtResource("2_0fe6t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(322, 44.5)
+shape = SubResource("RectangleShape2D_0fe6t")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(319.5, 44.5)
+shape = SubResource("RectangleShape2D_dcrea")

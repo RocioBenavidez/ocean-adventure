@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=4 uid="uid://da3l08xej8irv"]
 
-[ext_resource type="Script" uid="uid://dg3r4hs4agw1p" path="res://escenas/levels/level_3.gd" id="1_ee4so"]
+[ext_resource type="Script" uid="uid://dg3r4hs4agw1p" path="res://scripts/levels/level_3.gd" id="1_ee4so"]
 [ext_resource type="Shader" uid="uid://3x85iwgni3ks" path="res://escenas/levels/animacionagua.gdshader" id="1_vfm54"]
 [ext_resource type="Texture2D" uid="uid://corfm6xlolkg0" path="res://icon.svg" id="2_ee4so"]
 [ext_resource type="Texture2D" uid="uid://b6gtqowmgpjyq" path="res://assets/levels/level3.png" id="4_j0i5h"]
@@ -16,7 +16,7 @@ noise = SubResource("FastNoiseLite_j0i5h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1it0"]
 shader = ExtResource("1_vfm54")
-shader_parameter/color = Color(0.000671412, 0.0497385, 0.326604, 1)
+shader_parameter/color = Color(4.01614e-05, 0.00302348, 0.0630167, 1)
 shader_parameter/fast_noise = SubResource("NoiseTexture2D_6jluk")
 shader_parameter/speed = Vector2(0.03, 0.07)
 shader_parameter/wave_strength = 2.0
