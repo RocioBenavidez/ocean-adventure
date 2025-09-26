@@ -311,9 +311,3 @@ limit_left = 0
 limit_top = 0
 limit_right = 4700
 limit_bottom = 650
-<<<<<<< HEAD
-limit_smoothed = true
-drag_left_margin = 1.0
-drag_right_margin = 1.0
-=======
->>>>>>> 0248cdb3cfb627f3fdd01352bd1b626c18c9ca22
