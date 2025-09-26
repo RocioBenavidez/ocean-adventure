@@ -3,9 +3,13 @@ signal health_changed(vida)
 @export var speed: float = 300
 @export var vida: int = 100
 @export var energia: int = 0
+@onready var animated_sprite: AnimatedSprite2D = $AnimateSprite
 
 func _ready():
 	$Area2D.connect("area_entered",Callable(self,"_on_area_entered"))
+	animated_sprite.play("nadando")
+	# Conectar señal para saber cuando termina una animación
+	animated_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
@@ -21,7 +25,7 @@ func _physics_process(delta):
 
 	# Flip del sprite (opcional)
 	if velocity.x != 0:
-		$Sprite.flip_h = velocity.x < 0
+		$AnimateSprite.flip_h = velocity.x < 0
 
 
 func _on_area_entered(area):
@@ -40,14 +44,21 @@ func quitar_vida(cantidad: int):
 	vida -= cantidad
 	emit_signal("health_changed", vida)
 	print("Vida actual",vida)
+	animated_sprite.play("atontado")
 	if vida <= 0:
 		morir()
+	
 
 func consumir_comida(food : int):
 	energia += food
 	print("Comiste algo. Energía actual: %d" % energia)
+	animated_sprite.play("comiendo")
 	
-
-
 func  morir():
 	print("El jugador ha muerto.")
+	animated_sprite.play("dead")
+
+func _on_animation_finished():
+	# Solo volver a "nadando" si estaba en comiendo o atontado
+	if animated_sprite.animation in ["comiendo", "atontado"]:
+		animated_sprite.play("nadando")

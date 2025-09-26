@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://4p8gjvchk4r5"]
+
+[ext_resource type="Script" uid="uid://bbyuxebvm4i5a" path="res://scripts/entities/arrow.gd" id="1_t707t"]
+[ext_resource type="Texture2D" uid="uid://b8qephw3apptg" path="res://assets/levels/flecha1 (1).png" id="2_p1ei3"]
+[ext_resource type="Texture2D" uid="uid://s4s75ot0r43m" path="res://assets/levels/flecha1 (4).png" id="3_ld83u"]
+[ext_resource type="Texture2D" uid="uid://dplgkttirghw6" path="res://assets/levels/flecha1 (3).png" id="4_igq8l"]
+[ext_resource type="Texture2D" uid="uid://burm6jim5ab1j" path="res://assets/levels/flecha1 (2).png" id="5_xcu10"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tr341"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p1ei3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ld83u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_igq8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xcu10")
+}],
+"loop": true,
+"name": &"movimiento",
+"speed": 5.0
+}]
+
+[node name="Arrow" type="Node2D"]
+script = ExtResource("1_t707t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(156.339, 167.104)
+scale = Vector2(0.110665, 0.109172)
+sprite_frames = SubResource("SpriteFrames_tr341")
+animation = &"movimiento"
+frame_progress = 0.978307

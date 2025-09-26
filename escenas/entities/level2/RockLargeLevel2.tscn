@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bimonilhw23n4"]
+
+[ext_resource type="Texture2D" uid="uid://c6oy3tm5mj1m8" path="res://assets/obstacle/obstaculo1level2.png" id="1_tgbtt"]
+[ext_resource type="Script" uid="uid://y1gvcmtjs55a" path="res://scripts/entities/rock_large_level_2.gd" id="1_vox0c"]
+
+[node name="RockLargeLevel2" type="Node2D"]
+script = ExtResource("1_vox0c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tgbtt")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-28, -48, -3, -26, 25, -25, 29, 0, 32, 20, 54, 25, 57, 40, 47, 50, -37, 51, -44, -48)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-26, -49, 1, -26, 29, -25, 29, 22, 55, 24, 55, 44, 34, 52, -39, 49, -47, -21, -40, -50)
