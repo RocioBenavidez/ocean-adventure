@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://da3l08xej8irv"]
+[gd_scene load_steps=15 format=4 uid="uid://da3l08xej8irv"]
 
 [ext_resource type="Script" uid="uid://dg3r4hs4agw1p" path="res://scripts/levels/level_3.gd" id="1_ee4so"]
 [ext_resource type="Shader" uid="uid://3x85iwgni3ks" path="res://escenas/levels/animacionagua.gdshader" id="1_vfm54"]
@@ -5542,6 +5542,18 @@ sources/0 = SubResource("TileSetAtlasSource_l1it0")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfm54"]
 size = Vector2(52, 60)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0i5h"]
+size = Vector2(31, 660)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1it0"]
+size = Vector2(4712, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dwd"]
+size = Vector2(682.024, 11.4705)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7nou"]
+size = Vector2(4723.25, 20)
+
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_ee4so")
 
@@ -5565,3 +5577,22 @@ position = Vector2(3933, 636)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(543, -364)
 shape = SubResource("RectangleShape2D_vfm54")
+
+[node name="DangerZone" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(-8.5, 320)
+shape = SubResource("RectangleShape2D_j0i5h")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(2346, 0)
+shape = SubResource("RectangleShape2D_l1it0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(4701.74, 326.98)
+rotation = -1.5694
+shape = SubResource("RectangleShape2D_33dwd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(2352.38, 673)
+shape = SubResource("RectangleShape2D_l7nou")

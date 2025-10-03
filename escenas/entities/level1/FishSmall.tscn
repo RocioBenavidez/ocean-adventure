@@ -175,7 +175,9 @@ radius = 22.2042
 height = 63.6361
 
 [node name="FishSmall" type="Area2D"]
+position = Vector2(-2, 0)
 script = ExtResource("1_6u7wj")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(814.482, 242.149)

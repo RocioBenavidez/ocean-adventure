@@ -1,16 +1,16 @@
 extends "res://scripts/entities/static_obstacle.gd"
 
 @export var speed: float = 100.0
-@export var amplitude: float = 100.0
-@export var frequency: float = 1.5
+@export var amplitude: float = 20.0
+@export var frequency: float = 2.0
 
-var base_position: Vector2
-var time_passed := 0.0
-
-func _ready():
-	base_position = position
+var base_y: float
+var initialized := false
 
 func _process(delta):
-	time_passed += delta
-	var offset_y = sin(time_passed * frequency) * amplitude
-	position = base_position - Vector2(speed * time_passed, offset_y)
+	if not initialized:
+		base_y = global_position.y
+		initialized = true
+
+	global_position.x -= speed * delta
+	global_position.y = base_y + sin(Time.get_ticks_msec() / 1000.0 * frequency) * amplitude
