@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://draju8g74l5qq"]
 
 [ext_resource type="Texture2D" uid="uid://bywyemukscq2u" path="res://assets/obstacle/RocaGrande.png" id="1_ber2e"]
-[ext_resource type="Script" uid="uid://dd2h3gupriean" path="res://escenas/entities/level1/rock_spikes_large.gd" id="1_ux08o"]
+[ext_resource type="Script" uid="uid://dd2h3gupriean" path="res://scripts/entities/rock_spikes_large.gd" id="1_ux08o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ux08o"]
 radius = 16.4624
