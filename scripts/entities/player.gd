@@ -4,7 +4,7 @@ signal health_changed(vida)
 signal comer_comida(tiempo_extra)
 
 @export var speed: float = 300
-@export var vida: int = 100
+@export var vida: int = 50
 @export var energia: int = 0
 @onready var animated_sprite: AnimatedSprite2D = $AnimateSprite
 
