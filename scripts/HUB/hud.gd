@@ -1,12 +1,11 @@
 extends CanvasLayer
 
 @onready var health_bar: TextureProgressBar = $HealthBar
-@onready var time_bar: TextureProgressBar = $TimeBar
+@onready var time_bar: ProgressBar = $TimeBar
+@onready var timer: Timer = $Timer
 
 @export var tiempo_inicial: int = 60
-
 var tiempo_restante: int = 0
-var timer: Timer
 
 func _ready():
 	tiempo_restante = tiempo_inicial
@@ -14,13 +13,9 @@ func _ready():
 	time_bar.value = tiempo_restante
 	set_time(tiempo_restante)
 	
-	timer = Timer.new()
-	add_child(timer)
-	timer.wait_time = 1
-	timer.autostart = true
-	timer.one_shot = false
 	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
-		
+	timer.start()
+
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		var player = players[0]  
@@ -47,6 +42,7 @@ func _on_player_comer_comida(tiempo_extra: int):
 func _on_timer_timeout():
 	tiempo_restante -= 1
 	set_time(tiempo_restante)
+	print("Tiempo restante:", tiempo_restante)
 	if tiempo_restante <= 0:
 		game_over("Se te acabó en tiempo")
 	
@@ -55,4 +51,5 @@ func _on_level_up(extra_time: int):
 	set_time(tiempo_restante)
 
 func game_over(reason: String):
+	timer.stop()
 	print(reason)
