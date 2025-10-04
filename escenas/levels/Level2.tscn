@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=4 uid="uid://etnhfvrwoouc"]
+[gd_scene load_steps=23 format=4 uid="uid://etnhfvrwoouc"]
 
-[ext_resource type="Shader" path="res://escenas/levels/animacionagua.gdshader" id="1_0emhc"]
+[ext_resource type="Shader" uid="uid://3x85iwgni3ks" path="res://escenas/levels/animacionagua.gdshader" id="1_0emhc"]
 [ext_resource type="Script" uid="uid://bm8t65js7n6j6" path="res://scripts/levels/level_2.gd" id="1_kd5pu"]
 [ext_resource type="Texture2D" uid="uid://corfm6xlolkg0" path="res://icon.svg" id="2_klk11"]
 [ext_resource type="PackedScene" uid="uid://da3l08xej8irv" path="res://escenas/levels/Level3.tscn" id="2_p0bi4"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://bimonilhw23n4" path="res://escenas/entities/level2/RockLargeLevel2.tscn" id="8_awsd8"]
 [ext_resource type="PackedScene" uid="uid://4p8gjvchk4r5" path="res://escenas/entities/Arrow.tscn" id="9_5ui4f"]
 [ext_resource type="PackedScene" uid="uid://ddfoh24u0jkp6" path="res://escenas/entities/level2/FloatingTrash.tscn" id="10_1xamx"]
+[ext_resource type="PackedScene" uid="uid://pbt4cjt6shby" path="res://escenas/entities/Spawner.tscn" id="11_vu3t6"]
+[ext_resource type="PackedScene" uid="uid://car0nyp3vhhan" path="res://escenas/entities/level2/FishEnemyLevel2.tscn" id="12_6tq86"]
+[ext_resource type="PackedScene" uid="uid://dp02v1jo0wqjh" path="res://escenas/entities/level2/FishFoodLevel2.tscn" id="13_rrkft"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kd5pu"]
 noise_type = 4
@@ -6026,6 +6029,15 @@ sources/0 = SubResource("TileSetAtlasSource_q353h")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0bi4"]
 size = Vector2(439, 55.75)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xamx"]
+size = Vector2(21, 427)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vu3t6"]
+size = Vector2(4724, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tq86"]
+size = Vector2(14, 625)
+
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_kd5pu")
 siguiente_nivel = ExtResource("2_p0bi4")
@@ -6046,10 +6058,10 @@ position = Vector2(446, 4)
 [node name="SpawnPoint" type="Node2D" parent="." groups=["spawn_point"]]
 position = Vector2(-2, -3)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="FinishLevel" type="Area2D" parent="."]
 position = Vector2(3933, 636)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLevel"]
 position = Vector2(353.5, -6.875)
 shape = SubResource("RectangleShape2D_p0bi4")
 
@@ -6066,4 +6078,32 @@ rotation = -1.29283
 [node name="Arrow" parent="." instance=ExtResource("9_5ui4f")]
 position = Vector2(4124, 334)
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="DangerZone" type="StaticBody2D" parent="." groups=["danger_zone"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(0.5, 203.5)
+shape = SubResource("RectangleShape2D_1xamx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(2352, 0)
+shape = SubResource("RectangleShape2D_vu3t6")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(4704, 311.5)
+shape = SubResource("RectangleShape2D_6tq86")
+
+[node name="SpawnerEnemy" parent="." instance=ExtResource("11_vu3t6")]
+object_scene = ExtResource("12_6tq86")
+spawn_points = Array[NodePath]([NodePath("../point_enemy")])
+
+[node name="point_enemy" type="Marker2D" parent="."]
+position = Vector2(1113, 295)
+
+[node name="SpawnerFood1" parent="." instance=ExtResource("11_vu3t6")]
+object_scene = ExtResource("13_rrkft")
+spawn_points = Array[NodePath]([NodePath("../point_food1")])
+
+[node name="point_food1" type="Marker2D" parent="."]
+position = Vector2(1877, 252)
+
+[connection signal="body_entered" from="FinishLevel" to="." method="_on_area_2d_body_entered"]

@@ -1,38 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6p0a80mtdxs4"]
+[gd_scene load_steps=3 format=3 uid="uid://b6p0a80mtdxs4"]
 
 [ext_resource type="Script" uid="uid://cfi4177bxu4en" path="res://scripts/entities/fish_red.gd" id="1_bio5m"]
-[ext_resource type="Texture2D" uid="uid://cxklda4nxyr5m" path="res://assets/obstacle/tiburonGris.png" id="2_iq6r4"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7p8k"]
-radius = 22.9823
-height = 259.906
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bio5m"]
-radius = 18.9458
-height = 268.043
+[ext_resource type="Texture2D" uid="uid://baeh6mo2hu2k1" path="res://assets/obstacle/tiburon.png" id="2_iq6r4"]
 
 [node name="FishRed" type="Node2D"]
-position = Vector2(140, 84)
 script = ExtResource("1_bio5m")
 speed = 200.0
 damage = 30
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(721.155, 268.604)
-scale = Vector2(0.356826, 0.280399)
+position = Vector2(-201.5, -275)
+scale = Vector2(0.37449, 0.438776)
 texture = ExtResource("2_iq6r4")
+metadata/_edit_group_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(707, 264)
-rotation = 1.56234
-shape = SubResource("CapsuleShape2D_e7p8k")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-0.99745, -99.2263)
+scale = Vector2(0.796915, 0.737994)
+polygon = PackedVector2Array(-363.907, -215.142, -243.442, -320.834, -244.697, -255.793, -189.484, -232.758, -141.8, -265.278, -159.368, -212.432, -149.329, -173.136, -189.484, -196.172, -224.619, -181.267, -204.542, -160.941, -242.187, -156.876, -248.461, -171.781, -288.616, -170.426)
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(714, 267)
-rotation = 1.56189
-shape = SubResource("CapsuleShape2D_bio5m")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-292, -248, -201, -332, -196, -288, -152, -282, -115, -294, -131, -251, -122, -239, -156, -243, -176, -229, -166, -215, -192, -214, -204, -230, -269, -233)

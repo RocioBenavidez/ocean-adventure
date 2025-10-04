@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://yb0pha84y557"]
+
+[ext_resource type="Texture2D" uid="uid://bkue43huf6ach" path="res://assets/food/food5.png" id="1_v1yha"]
+
+[node name="FishFood2Level3" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v1yha")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-59, -2, 20, -59, 25, -14, 67, -21, 45, 5, 68, 32, 19, 22, 2, 56)
