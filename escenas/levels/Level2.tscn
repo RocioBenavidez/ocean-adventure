@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=4 uid="uid://etnhfvrwoouc"]
 
-[ext_resource type="Shader" uid="uid://3x85iwgni3ks" path="res://escenas/levels/animacionagua.gdshader" id="1_0emhc"]
+[ext_resource type="Shader" path="res://escenas/levels/animacionagua.gdshader" id="1_0emhc"]
 [ext_resource type="Script" uid="uid://bm8t65js7n6j6" path="res://scripts/levels/level_2.gd" id="1_kd5pu"]
 [ext_resource type="Texture2D" uid="uid://corfm6xlolkg0" path="res://icon.svg" id="2_klk11"]
 [ext_resource type="PackedScene" uid="uid://da3l08xej8irv" path="res://escenas/levels/Level3.tscn" id="2_p0bi4"]
