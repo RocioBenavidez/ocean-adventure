@@ -28,4 +28,7 @@ func spawn_player():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player"):
-		get_tree().change_scene_to_packed(finish)
+		call_deferred("_cambiar_nivel")
+
+func _cambiar_nivel():
+	get_tree().change_scene_to_packed(finish)

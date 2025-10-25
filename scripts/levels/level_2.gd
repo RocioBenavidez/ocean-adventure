@@ -31,6 +31,9 @@ func _on_area_2d_body_entered(body):
 		
 		if siguiente_nivel:
 			print("Cambiando al siguiente nivel...")
-			get_tree().change_scene_to_packed(siguiente_nivel)
+			call_deferred("_cambiar_nivel")
 		else:
 			push_warning("No se ha asignado un siguiente nivel.")
+
+func _cambiar_nivel():
+	get_tree().change_scene_to_packed(siguiente_nivel)
