@@ -1,12 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://by7upjxxugctk"]
+[gd_scene load_steps=4 format=3 uid="uid://by7upjxxugctk"]
 
 [ext_resource type="Script" uid="uid://cjfcw03pq8c4d" path="res://scripts/HUB/menu.gd" id="1_d7r87"]
 [ext_resource type="Texture2D" uid="uid://b8sx4eq7uwavw" path="res://assets/ui/Aventura en el Océano.png" id="1_vdanu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d7r87"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2owot"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="menu" type="Control"]
@@ -58,11 +55,4 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxFlat_d7r87")
 text = "JUGAR"
 
-[node name="load" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_2owot")
-text = "CARGAR"
-
 [connection signal="pressed" from="VBoxContainer/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/load" to="." method="_on_load_pressed"]

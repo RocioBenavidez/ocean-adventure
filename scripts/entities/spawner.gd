@@ -38,4 +38,3 @@ func _on_timer_timeout():
 	get_tree().current_scene.add_child(obj)
 	# 👉 Usamos global_position para que aparezca EXACTAMENTE donde debe
 	obj.global_position = spawn_pos
-	print("🎯 Spawneando enemigo en GLOBAL:", spawn_pos)

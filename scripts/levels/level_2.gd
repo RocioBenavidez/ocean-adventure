@@ -10,20 +10,25 @@ func _ready():
 func spawn_player():
 	var player = player_prefab.instantiate()
 	
-	# Buscar el spawn point
+	# Colocamos al jugador
 	var spawn_point = get_node("SpawnPoint")
 	if spawn_point:
 		player.position = spawn_point.position
 	else:
-		player.position = Vector2(100, 300)  # fallback
+		player.position = Vector2(100, 300)
+	
+	# Asignar la vida desde la variable global
+	player.vida = Global.vida_player
 	
 	add_child(player)
-	print(" Jugador instanciado y colocado en el nivel")
+	print("Jugador instanciado con vida:", player.vida)
 
 
 func _on_area_2d_body_entered(body):
-	# Verificamos que el cuerpo sea el jugador
-	if body.is_in_group("player") or body == get_node("Player"):  # Ajusta según cómo identifiques al jugador
+	if body.is_in_group("player"):
+		# Guardar la vida actual del jugador
+		Global.vida_player = body.vida  # suponiendo que el player tiene variable "vida"
+		
 		if siguiente_nivel:
 			print("Cambiando al siguiente nivel...")
 			get_tree().change_scene_to_packed(siguiente_nivel)

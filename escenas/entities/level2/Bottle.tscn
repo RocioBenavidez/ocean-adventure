@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://qf6mjiogchug"]
+
+[ext_resource type="Script" uid="uid://xtho7x34vvw8" path="res://scripts/entities/bottle.gd" id="1_0g0vj"]
+[ext_resource type="Texture2D" uid="uid://d2fxi8ofavwm" path="res://assets/obstacle/botella.png" id="1_ybsdd"]
+
+[node name="Bottle" type="Node2D"]
+script = ExtResource("1_0g0vj")
+
+[node name="Botella" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.22151, 0.178571)
+texture = ExtResource("1_ybsdd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-0.999989, 2.00002)
+scale = Vector2(0.403208, 0.395833)
+polygon = PackedVector2Array(-66, 42, -32, 1, -17, -28, 22, -71, 47, -55, 38, -45, 26, 25, 10, 42, -1, 79)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-3.8147e-06, 1)
+scale = Vector2(0.425332, 0.381757)
+polygon = PackedVector2Array(-68, 48, -29, 3, -27, -28, 18, -69, 45, -59, 38, -32, 26, 29, -5, 79)
