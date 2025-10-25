@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://fmbx15ybkb5d"]
+[gd_scene load_steps=5 format=3 uid="uid://fmbx15ybkb5d"]
 
 [ext_resource type="Texture2D" uid="uid://dcri8lj6k4org" path="res://assets/ui/vidaBarMin.png" id="1_aaqae"]
 [ext_resource type="Script" uid="uid://gt507qmt1b5c" path="res://scripts/HUB/hud.gd" id="1_jd13s"]
 [ext_resource type="Texture2D" uid="uid://b28tdebf44y7i" path="res://assets/ui/vidaBarMax.png" id="2_jd13s"]
+[ext_resource type="Texture2D" uid="uid://cof1u8nir36ou" path="res://assets/ui/reloj-temporizador-estilo-pixel-art_475147-229.png" id="4_j4wys"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_jd13s")
@@ -12,7 +13,8 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -150.0
-offset_bottom = 56.0
+offset_top = 7.0
+offset_bottom = 63.0
 grow_horizontal = 0
 size_flags_horizontal = 3
 value = 100.0
@@ -29,5 +31,10 @@ offset_top = 15.0
 offset_right = 962.0
 offset_bottom = 42.0
 value = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(126, 24)
+scale = Vector2(0.127796, 0.134984)
+texture = ExtResource("4_j4wys")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

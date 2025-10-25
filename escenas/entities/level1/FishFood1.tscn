@@ -1,19 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://6jelg4iwkrlm"]
 
 [ext_resource type="Script" uid="uid://bup6ta5cimxe2" path="res://scripts/entities/fish_food_1.gd" id="1_ssicg"]
-[ext_resource type="Texture2D" uid="uid://cy1x7p5iggv64" path="res://assets/food/food1.png" id="2_hf7e7"]
+[ext_resource type="Texture2D" uid="uid://cy1x7p5iggv64" path="res://assets/food/level1/food1.png" id="2_hf7e7"]
 
 [node name="FishFood1" type="Area2D"]
-position = Vector2(593, 263)
+position = Vector2(581, 256)
 script = ExtResource("1_ssicg")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-44, -47.25)
 scale = Vector2(0.421053, 0.413043)
 texture = ExtResource("2_hf7e7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-44.4313, -50.1538)
+rotation = 3.14159
 scale = Vector2(0.459711, 0.423077)
 polygon = PackedVector2Array(-65, -4, 23, -67, 6, -22, 54, -20, 56, 26, 9, 22, -2, 63)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://etnhfvrwoouc"]
+[gd_scene load_steps=26 format=4 uid="uid://etnhfvrwoouc"]
 
 [ext_resource type="Shader" path="res://escenas/levels/animacionagua.gdshader" id="1_0emhc"]
 [ext_resource type="Script" uid="uid://bm8t65js7n6j6" path="res://scripts/levels/level_2.gd" id="1_kd5pu"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://pbt4cjt6shby" path="res://escenas/entities/Spawner.tscn" id="11_vu3t6"]
 [ext_resource type="PackedScene" uid="uid://car0nyp3vhhan" path="res://escenas/entities/level2/FishEnemyLevel2.tscn" id="12_6tq86"]
 [ext_resource type="PackedScene" uid="uid://dp02v1jo0wqjh" path="res://escenas/entities/level2/FishFoodLevel2.tscn" id="13_rrkft"]
+[ext_resource type="PackedScene" uid="uid://bnc1twhhdivpm" path="res://escenas/entities/level2/FishFood2Level2.tscn" id="14_nyjl8"]
+[ext_resource type="PackedScene" uid="uid://btoyy8hwtql03" path="res://escenas/entities/level2/FishFood3Level2.tscn" id="15_a6y3v"]
+[ext_resource type="PackedScene" uid="uid://qf6mjiogchug" path="res://escenas/entities/level2/Bottle.tscn" id="16_iwgxi"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kd5pu"]
 noise_type = 4
@@ -6093,17 +6096,53 @@ position = Vector2(4704, 311.5)
 shape = SubResource("RectangleShape2D_6tq86")
 
 [node name="SpawnerEnemy" parent="." instance=ExtResource("11_vu3t6")]
+position = Vector2(2855, 554)
 object_scene = ExtResource("12_6tq86")
 spawn_points = Array[NodePath]([NodePath("../point_enemy")])
+spawn_interval = 4.5
 
 [node name="point_enemy" type="Marker2D" parent="."]
-position = Vector2(1113, 295)
+position = Vector2(2901, 540)
 
 [node name="SpawnerFood1" parent="." instance=ExtResource("11_vu3t6")]
+position = Vector2(3357, 365)
 object_scene = ExtResource("13_rrkft")
 spawn_points = Array[NodePath]([NodePath("../point_food1")])
+spawn_interval = 7.0
 
 [node name="point_food1" type="Marker2D" parent="."]
-position = Vector2(1877, 252)
+position = Vector2(3363, 373)
+
+[node name="SpawnerFood2" parent="." instance=ExtResource("11_vu3t6")]
+position = Vector2(4523, 321)
+scale = Vector2(-2730.08, -881.872)
+object_scene = ExtResource("14_nyjl8")
+spawn_points = Array[NodePath]([NodePath("../point_food2")])
+spawn_interval = 6.0
+
+[node name="point_food2" type="Marker2D" parent="."]
+position = Vector2(4519, 314)
+
+[node name="SpawnerFood3" parent="." instance=ExtResource("11_vu3t6")]
+position = Vector2(-9.59819e+06, -133012)
+scale = Vector2(7.45335e+06, 777698)
+object_scene = ExtResource("15_a6y3v")
+spawn_points = Array[NodePath]([NodePath("../point_food3")])
+spawn_interval = 7.0
+
+[node name="point_food3" type="Marker2D" parent="."]
+position = Vector2(20, 635)
+
+[node name="Bottle" parent="." instance=ExtResource("16_iwgxi")]
+position = Vector2(1301, -177)
+
+[node name="FloatingTrash2" parent="." instance=ExtResource("10_1xamx")]
+position = Vector2(2484, -173)
+
+[node name="Bottle2" parent="." instance=ExtResource("16_iwgxi")]
+position = Vector2(3502, -192)
+
+[node name="FloatingTrash3" parent="." instance=ExtResource("10_1xamx")]
+position = Vector2(3986, -207)
 
 [connection signal="body_entered" from="FinishLevel" to="." method="_on_area_2d_body_entered"]

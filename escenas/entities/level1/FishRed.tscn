@@ -10,7 +10,6 @@ damage = 30
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-201.5, -275)
 scale = Vector2(0.37449, 0.438776)
 texture = ExtResource("2_iq6r4")
 metadata/_edit_group_ = true
@@ -18,11 +17,12 @@ metadata/_edit_group_ = true
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(-0.99745, -99.2263)
+position = Vector2(197, 173)
 scale = Vector2(0.796915, 0.737994)
 polygon = PackedVector2Array(-363.907, -215.142, -243.442, -320.834, -244.697, -255.793, -189.484, -232.758, -141.8, -265.278, -159.368, -212.432, -149.329, -173.136, -189.484, -196.172, -224.619, -181.267, -204.542, -160.941, -242.187, -156.876, -248.461, -171.781, -288.616, -170.426)
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(199, 277)
 polygon = PackedVector2Array(-292, -248, -201, -332, -196, -288, -152, -282, -115, -294, -131, -251, -122, -239, -156, -243, -176, -229, -166, -215, -192, -214, -204, -230, -269, -233)
