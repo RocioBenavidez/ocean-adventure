@@ -38,7 +38,6 @@ func _physics_process(delta):
 
 
 func consumir_comida(food: int):
-	emit_signal("time_changed", food)
 	animated_sprite.play("comiendo")
 
 
@@ -48,6 +47,7 @@ func _on_area_entered(area):
 
 	if area is Food:
 		emit_signal("comer_comida", area.bonus)
+		consumir_comida(area.bonus)
 		area.queue_free()
 		return
 	
@@ -63,7 +63,6 @@ func quitar_vida(cantidad: int):
 
 	vida -= cantidad
 	emit_signal("health_changed", vida)
-	print("Vida actual", vida)
 	animated_sprite.play("atontado")
 
 	if vida <= 0:
@@ -74,7 +73,6 @@ func morir():
 	if muerto:
 		return  
 	muerto = true
-	print("El jugador ha muerto.")
 	animated_sprite.play("dead")
 
 	# Desactivar colisiones y movimiento
