@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dhnoi3h2jdty5"]
+[gd_scene load_steps=26 format=4 uid="uid://dhnoi3h2jdty5"]
 
 [ext_resource type="Shader" path="res://escenas/levels/animacionagua.gdshader" id="1_6jluk"]
 [ext_resource type="PackedScene" uid="uid://etnhfvrwoouc" path="res://escenas/levels/Level2.tscn" id="1_hbmvs"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://pbt4cjt6shby" path="res://escenas/entities/Spawner.tscn" id="9_bmstx"]
 [ext_resource type="PackedScene" uid="uid://6jelg4iwkrlm" path="res://escenas/entities/level1/FishFood1.tscn" id="11_vlg6r"]
 [ext_resource type="PackedScene" uid="uid://draju8g74l5qq" path="res://escenas/entities/level1/RockSpikesLarge.tscn" id="12_8k85h"]
+[ext_resource type="PackedScene" uid="uid://ctsai7ggvy0yh" path="res://escenas/entities/level1/FishFood2.tscn" id="13_hbvfj"]
+[ext_resource type="PackedScene" uid="uid://dvj7e5oc5ryli" path="res://escenas/entities/level1/FishFood3.tscn" id="14_pw3rc"]
 
 [sub_resource type="GDScript" id="GDScript_6jluk"]
 script/source = "extends Node2D
@@ -26,23 +28,28 @@ func _ready():
 func spawn_player():
 	var player = player_prefab.instantiate()
 	
-	# Buscar el spawn point
+	# Colocamos al jugador
 	var spawn_point = get_node(\"SpawnPoint\")
 	if spawn_point:
 		player.position = spawn_point.position
 	else:
-		player.position = Vector2(100, 300)  # fallback
+		player.position = Vector2(100, 300)
+	
+	# Asignar la vida desde la variable global
+	player.vida = Global.vida_player
 	
 	add_child(player)
-	print(\" Jugador instanciado y colocado en el nivel\")
+	print(\"Jugador instanciado con vida:\", player.vida)
 
 
 func _on_area_2d_body_entered(body):
-	# Verificamos que el cuerpo sea el jugador
-	if body.is_in_group(\"player\") or body == get_node(\"Player\"):  # Ajusta según cómo identifiques al jugador
+	if body.is_in_group(\"player\"):
+		# Guardar la vida actual del jugador
+		Global.vida_player = body.vida  # suponiendo que el player tiene variable \"vida\"
+		
 		if siguiente_nivel:
 			print(\"Cambiando al siguiente nivel...\")
-			get_tree().change_scene_to_packed(siguiente_nivel)
+			call_deferred(\"_cambiar_nivel\")
 		else:
 			push_warning(\"No se ha asignado un siguiente nivel.\")
 
@@ -50,6 +57,10 @@ func _on_area_2d_body_entered(body):
 func _on_danger_zone_body_entered(body):
 	if body.is_in_group(\"player\") or body == get_node(\"Player\"): 
 		body.quitar_vida(5) 
+
+
+func _cambiar_nivel():
+	get_tree().change_scene_to_packed(siguiente_nivel)
 "
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6jluk"]
@@ -6376,28 +6387,28 @@ shape = SubResource("RectangleShape2D_6jluk")
 position = Vector2(4307, 182)
 object_scene = ExtResource("4_bmstx")
 spawn_points = Array[NodePath]([NodePath("../Point_enemy1")])
-spawn_interval = 10.0
+spawn_interval = 3.5
 
 [node name="Point_enemy1" type="Marker2D" parent="."]
-position = Vector2(4797, 433)
+position = Vector2(4307, 182)
 
 [node name="Spawner_food" parent="." instance=ExtResource("9_bmstx")]
-position = Vector2(1503, 262)
+position = Vector2(1958, 530)
 object_scene = ExtResource("7_hbvfj")
 spawn_points = Array[NodePath]([NodePath("../Point_food")])
 spawn_interval = 5.0
 
 [node name="Point_food" type="Marker2D" parent="."]
-position = Vector2(3257, 133)
+position = Vector2(3287, 183)
 
 [node name="Spawner_food1" parent="." instance=ExtResource("9_bmstx")]
-position = Vector2(1530, 234)
+position = Vector2(1958, 530)
 object_scene = ExtResource("11_vlg6r")
 spawn_points = Array[NodePath]([NodePath("../Point_food2")])
-spawn_interval = 3.0
+spawn_interval = 7.0
 
 [node name="Point_food2" type="Marker2D" parent="."]
-position = Vector2(1902, 251)
+position = Vector2(3843, 530)
 
 [node name="RockSpikesLarge" parent="." instance=ExtResource("12_8k85h")]
 position = Vector2(1698, 380)
@@ -6416,5 +6427,30 @@ shape = SubResource("RectangleShape2D_hbvfj")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="DangerZone"]
 position = Vector2(4704, 122)
 shape = SubResource("RectangleShape2D_pw3rc")
+
+[node name="Spawner_food2" parent="." instance=ExtResource("9_bmstx")]
+position = Vector2(257, 433)
+object_scene = ExtResource("13_hbvfj")
+spawn_points = Array[NodePath]([NodePath("../Point_food3")])
+spawn_interval = 5.0
+
+[node name="Point_food3" type="Marker2D" parent="."]
+position = Vector2(257, 419)
+
+[node name="Point_food4" type="Marker2D" parent="."]
+position = Vector2(4476, 419)
+
+[node name="Spawner_food3" parent="." instance=ExtResource("9_bmstx")]
+position = Vector2(4476, 419)
+object_scene = ExtResource("14_pw3rc")
+spawn_points = Array[NodePath]([NodePath("../Point_food4")])
+spawn_interval = 7.0
+
+[node name="Spawnerfood4" parent="." instance=ExtResource("9_bmstx")]
+object_scene = ExtResource("11_vlg6r")
+spawn_points = Array[NodePath]([NodePath("../pointfood4"), NodePath("../Point_food3")])
+
+[node name="pointfood4" type="Marker2D" parent="."]
+position = Vector2(2481, 242)
 
 [connection signal="body_entered" from="FinishLevel" to="." method="_on_area_2d_body_entered"]

@@ -285,7 +285,7 @@ position = Vector2(462, 267)
 rotation = -0.000441388
 scale = Vector2(0.240875, 0.197932)
 sprite_frames = SubResource("SpriteFrames_gxvx0")
-animation = &"win"
+animation = &"comiendo"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(458, 265)

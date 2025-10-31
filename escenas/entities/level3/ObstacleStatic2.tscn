@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvwvqnaa3t13t"]
+
+[ext_resource type="Texture2D" uid="uid://bwl1bug6ujo8g" path="res://assets/obstacle/obstaculo3level3.png" id="1_u5qn2"]
+[ext_resource type="Script" uid="uid://bghxrihg13c1w" path="res://scripts/entities/obstacle_static_2.gd" id="1_xff1c"]
+
+[node name="ObstacleStatic2" type="Node2D"]
+script = ExtResource("1_xff1c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u5qn2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-70, -96, -1, -84, 6, -64, 5, -41, -16, -30, -11, 17, 27, 40, 21, 72, -22, 99, -72, 107)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-70, -103, -3, -92, 12, -64, 10, -42, -13, -24, -14, 19, 15, 21, 28, 44, 28, 71, -26, 109, -73, 110)
