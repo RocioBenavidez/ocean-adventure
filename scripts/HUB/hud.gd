@@ -1,16 +1,22 @@
 extends CanvasLayer
 
 @onready var health_bar: TextureProgressBar = $HealthBar
-@onready var time_bar: ProgressBar = $TimeBar
 @onready var timer: Timer = $Timer
+@onready var time_bar: TextureProgressBar = $TimeBar
+@onready var time_aro: TextureProgressBar = $TimeBarAro
 
 @export var tiempo_inicial: int = 20
 var tiempo_restante: int = 0
 
 func _ready():
 	tiempo_restante = tiempo_inicial
+
+	# Configuración inicial de rangos
+	time_bar.min_value = 0
 	time_bar.max_value = tiempo_inicial
-	time_bar.value = tiempo_restante
+	time_aro.min_value = 0
+	time_aro.max_value = tiempo_restante
+
 	set_time(tiempo_restante)
 	timer.start()
 
@@ -28,9 +34,22 @@ func _ready():
 func set_health(value: int):
 	health_bar.value = value
 
+# 🕒 Actualiza ambas barras de tiempo
 func set_time(value: int):
-	time_bar.value = clamp(value, 0, time_bar.max_value)
+	value = clamp(value, 0, tiempo_inicial)
+	var mitad = tiempo_inicial / 2.0
 
+	if value > mitad:
+		# Primera mitad del tiempo → usa la barra
+		var valor_barra = (value - mitad) / mitad * time_bar.max_value
+		time_bar.value = valor_barra
+		time_aro.value = time_aro.max_value
+	else:
+		# Segunda mitad → usa el aro
+		var valor_aro = value / mitad * time_aro.max_value
+		time_bar.value = 0
+		time_aro.value = valor_aro
+		
 func _on_player_health_changed(value: int):
 	set_health(value)
 
