@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://fmbx15ybkb5d"]
+[gd_scene load_steps=9 format=3 uid="uid://fmbx15ybkb5d"]
 
 [ext_resource type="Texture2D" uid="uid://dcri8lj6k4org" path="res://assets/ui/vidaBarMin.png" id="1_aaqae"]
 [ext_resource type="Script" uid="uid://gt507qmt1b5c" path="res://scripts/HUB/hud.gd" id="1_jd13s"]
 [ext_resource type="Texture2D" uid="uid://b28tdebf44y7i" path="res://assets/ui/vidaBarMax.png" id="2_jd13s"]
+[ext_resource type="Texture2D" uid="uid://mfs8mh0saa36" path="res://assets/ui/timeAro.png" id="4_400wl"]
 [ext_resource type="Texture2D" uid="uid://cof1u8nir36ou" path="res://assets/ui/reloj-temporizador-estilo-pixel-art_475147-229.png" id="4_j4wys"]
+[ext_resource type="Texture2D" uid="uid://1boxqe6prgt6" path="res://assets/ui/timeBar.png" id="5_1pvp0"]
+[ext_resource type="Texture2D" uid="uid://d2px5itbtd8n6" path="res://assets/ui/timeAroGreen.png" id="5_u74hv"]
+[ext_resource type="Texture2D" uid="uid://db3reqp7dcrls" path="res://assets/ui/timeBarGreen.png" id="6_1pvp0"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_jd13s")
@@ -25,16 +29,41 @@ metadata/_edit_use_anchors_ = true
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="TimeBar" type="ProgressBar" parent="."]
-offset_left = 132.0
-offset_top = 15.0
-offset_right = 962.0
-offset_bottom = 42.0
-value = 100.0
+[node name="TimeBarAro" type="TextureProgressBar" parent="."]
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 260.0
+offset_bottom = 263.0
+scale = Vector2(0.129582, 0.109586)
+max_value = 10.0
+step = 0.1
+value = 10.0
+fill_mode = 4
+radial_initial_angle = 90.0
+texture_under = ExtResource("4_400wl")
+texture_progress = ExtResource("5_u74hv")
+tint_under = Color(0, 0, 0, 1)
+tint_over = Color(0, 0.530712, 0.530712, 1)
+
+[node name="TimeBar" type="TextureProgressBar" parent="."]
+offset_left = 800.0
+offset_top = 67.0
+offset_right = 1160.0
+offset_bottom = 427.0
+rotation = 3.14403
+scale = Vector2(2.36023, 0.302207)
+max_value = 10.0
+value = 10.0
+fill_mode = 1
+texture_under = ExtResource("5_1pvp0")
+texture_progress = ExtResource("6_1pvp0")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(0.635185, 0.779179, 0.857512, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(126, 24)
-scale = Vector2(0.127796, 0.134984)
+position = Vector2(20, 17)
+rotation = -0.16171
+scale = Vector2(0.0762751, 0.0740783)
 texture = ExtResource("4_j4wys")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
