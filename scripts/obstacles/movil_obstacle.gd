@@ -1,5 +1,5 @@
 class_name MovilObstacle
-extends "res://scripts/entities/static_obstacle.gd"
+extends StaticObstacle
 
 @export var speed: float = 100.0
 @export var amplitude: float = 20.0

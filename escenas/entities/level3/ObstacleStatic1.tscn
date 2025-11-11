@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://capug6t81ixjb"]
 
-[ext_resource type="Script" uid="uid://rcvppd2a1sci" path="res://scripts/entities/obstacle_static_1.gd" id="1_dmmxv"]
+[ext_resource type="Script" uid="uid://rcvppd2a1sci" path="res://scripts/obstacles/level3/obstacle_static_1.gd" id="1_dmmxv"]
 [ext_resource type="Texture2D" uid="uid://sehtshcf60i4" path="res://assets/obstacle/obstacle2Level3.png" id="1_juxn8"]
 
 [node name="ObstacleStatic1" type="Node2D"]

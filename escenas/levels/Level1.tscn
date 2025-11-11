@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=4 uid="uid://dhnoi3h2jdty5"]
+[gd_scene load_steps=25 format=4 uid="uid://dhnoi3h2jdty5"]
 
-[ext_resource type="Shader" path="res://escenas/levels/animacionagua.gdshader" id="1_6jluk"]
-[ext_resource type="PackedScene" uid="uid://etnhfvrwoouc" path="res://escenas/levels/Level2.tscn" id="1_hbmvs"]
+[ext_resource type="Shader" uid="uid://3x85iwgni3ks" path="res://escenas/levels/animacionagua.gdshader" id="1_6jluk"]
 [ext_resource type="Texture2D" uid="uid://cp8civl1xj8uh" path="res://assets/levels/level1.png" id="2_yt8sc"]
 [ext_resource type="PackedScene" uid="uid://b6p0a80mtdxs4" path="res://escenas/entities/level1/FishRed.tscn" id="4_bmstx"]
 [ext_resource type="Texture2D" uid="uid://corfm6xlolkg0" path="res://icon.svg" id="5_8k85h"]
@@ -18,8 +17,9 @@
 [sub_resource type="GDScript" id="GDScript_6jluk"]
 script/source = "extends Node2D
 
-@export var siguiente_nivel: PackedScene
+
 @export var player_prefab = preload(\"res://escenas/entities/player.tscn\")
+signal level_completed
 
 func _ready():
 	spawn_player()
@@ -39,28 +39,21 @@ func spawn_player():
 	player.vida = Global.vida_player
 	
 	add_child(player)
+	player.connect(\"player_died\", Callable(get_node(\"/root/GameManager\"), \"on_player_died\"))
+
 	print(\"Jugador instanciado con vida:\", player.vida)
 
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group(\"player\"):
-		# Guardar la vida actual del jugador
-		Global.vida_player = body.vida  # suponiendo que el player tiene variable \"vida\"
-		
-		if siguiente_nivel:
-			print(\"Cambiando al siguiente nivel...\")
-			call_deferred(\"_cambiar_nivel\")
-		else:
-			push_warning(\"No se ha asignado un siguiente nivel.\")
+		Global.vida_player = body.vida
+		print(\"Nivel completado.\")
+		emit_signal(\"level_completed\")
 
 
 func _on_danger_zone_body_entered(body):
 	if body.is_in_group(\"player\") or body == get_node(\"Player\"): 
 		body.quitar_vida(5) 
-
-
-func _cambiar_nivel():
-	get_tree().change_scene_to_packed(siguiente_nivel)
 "
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6jluk"]
@@ -6349,7 +6342,6 @@ size = Vector2(16, 260)
 
 [node name="Level1" type="Node2D"]
 script = SubResource("GDScript_6jluk")
-siguiente_nivel = ExtResource("1_hbmvs")
 
 [node name="AnimacionAgua" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_hbvfj")
@@ -6367,11 +6359,9 @@ tile_set = SubResource("TileSet_of2k7")
 
 [node name="RockSpikesSmall" parent="." instance=ExtResource("5_vlg6r")]
 position = Vector2(576, -41)
-damage = 6
 
 [node name="RockSpikesMedium" parent="." instance=ExtResource("6_8k85h")]
 position = Vector2(59, 85)
-damage = 8
 
 [node name="SpawnPoint" type="Node2D" parent="." groups=["spawn_point"]]
 position = Vector2(-2, -3)

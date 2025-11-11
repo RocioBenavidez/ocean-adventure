@@ -1,15 +1,16 @@
-extends "res://scripts/entities/static_obstacle.gd"
+extends StaticObstacle
 
 @export var speed: float = 50.0
 @export var amplitude: float = 30.0
 @export var frequency: float = 1.0
-
+@onready var damage_strategy_script := preload("res://scripts/obstacles/strategies/damage/MediumDamage.gd")
 var base_position: Vector2
 var time_passed := 0.0
 
 func _ready():
 	base_position = position
-
+	damage_strategy = damage_strategy_script.new()
+	set_damage_strategy(damage_strategy)
 func _process(delta):
 	time_passed += delta
 	# Oscilación horizontal

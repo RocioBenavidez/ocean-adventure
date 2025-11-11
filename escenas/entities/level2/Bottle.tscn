@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qf6mjiogchug"]
 
-[ext_resource type="Script" uid="uid://xtho7x34vvw8" path="res://scripts/entities/bottle.gd" id="1_0g0vj"]
+[ext_resource type="Script" uid="uid://xtho7x34vvw8" path="res://scripts/obstacles/level2/bottle.gd" id="1_0g0vj"]
 [ext_resource type="Texture2D" uid="uid://d2fxi8ofavwm" path="res://assets/obstacle/botella.png" id="1_ybsdd"]
 
 [node name="Bottle" type="Node2D"]

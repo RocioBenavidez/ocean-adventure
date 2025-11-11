@@ -1,7 +1,8 @@
 extends Node2D
 
-@export var siguiente_nivel: PackedScene
+
 @export var player_prefab = preload("res://escenas/entities/player.tscn")
+signal level_completed
 
 func _ready():
 	spawn_player()
@@ -21,19 +22,13 @@ func spawn_player():
 	player.vida = Global.vida_player
 	
 	add_child(player)
+	player.connect("player_died", Callable(get_node("/root/GameManager"), "on_player_died"))
+
 	print("Jugador instanciado con vida:", player.vida)
 
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player"):
-		# Guardar la vida actual del jugador
-		Global.vida_player = body.vida  # suponiendo que el player tiene variable "vida"
-		
-		if siguiente_nivel:
-			print("Cambiando al siguiente nivel...")
-			call_deferred("_cambiar_nivel")
-		else:
-			push_warning("No se ha asignado un siguiente nivel.")
-
-func _cambiar_nivel():
-	get_tree().change_scene_to_packed(siguiente_nivel)
+		Global.vida_player = body.vida
+		print("Nivel completado.")
+		emit_signal("level_completed")
