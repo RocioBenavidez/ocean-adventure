@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c30to3025gae8"]
 
-[ext_resource type="Script" uid="uid://bjl4kwnpbltoi" path="res://scripts/entities/fish_food_3_level_3.gd" id="1_8uycf"]
+[ext_resource type="Script" path="res://scripts/entities/fish_food_3_level_3.gd" id="1_8uycf"]
 [ext_resource type="Texture2D" uid="uid://bhyv8x8g0ph5i" path="res://assets/food/level3/food7.png" id="2_51kur"]
 
 [node name="FishFood3Level3" type="Area2D"]

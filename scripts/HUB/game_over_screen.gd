@@ -1,6 +1,6 @@
 extends Control
 
-@onready var menu = preload("res://escenas/HUB/menu.tscn")
+@onready var menu = preload("res://escenas/screens/menu.tscn")
 @onready var boton = $Button  # Path correcto al botón en la escena
 
 

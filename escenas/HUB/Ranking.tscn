@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://pu1iukc3m7ta"]
+
+[ext_resource type="Script" uid="uid://xvbi2pnqjw14" path="res://escenas/HUB/ranking.gd" id="1_a0dpm"]
+
+[node name="Ranking" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a0dpm")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ScoreList" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

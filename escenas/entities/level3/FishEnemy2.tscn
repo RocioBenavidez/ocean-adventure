@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtjgfassyjfni"]
 
-[ext_resource type="Script" uid="uid://cy21tet7xpfmn" path="res://scripts/entities/fish_enemy_2.gd" id="1_i1jl0"]
+[ext_resource type="Script" uid="uid://cy21tet7xpfmn" path="res://scripts/obstacles/level1/fish_enemy_2.gd" id="1_i1jl0"]
 [ext_resource type="Texture2D" uid="uid://dn82u2mn2eboj" path="res://assets/obstacle/Enemy2.png" id="2_pfrv0"]
 
 [node name="FishEnemy2" type="Node2D"]

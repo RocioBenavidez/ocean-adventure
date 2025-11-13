@@ -2,12 +2,13 @@ extends CharacterBody2D
 
 signal health_changed(vida)
 signal comer_comida(tiempo_extra)
+signal player_died
 
 @export var speed: float = 400
 @export var vida: int = 100
 @export var energia: int = 0
 @onready var animated_sprite: AnimatedSprite2D = $AnimateSprite
-@onready var game_over_scene = preload("res://escenas/HUB/GameOverScreen.tscn")
+@onready var game_over_scene = preload("res://escenas/screens/GameOverScreen.tscn")
 
 var muerto: bool = false  
 
@@ -48,13 +49,14 @@ func _on_area_entered(area):
 	if area is Food:
 		emit_signal("comer_comida", area.bonus)
 		consumir_comida(area.bonus)
+		Global.set_score()
 		area.queue_free()
 		return
 	
 	var obstacle_node = area.get_parent()
 	if obstacle_node.has_method("get_obstacle_info"):
 		var info = obstacle_node.get_obstacle_info()
-		quitar_vida(info.damage)
+		quitar_vida(info["damage"])
 
 
 func quitar_vida(cantidad: int):
@@ -75,19 +77,12 @@ func morir():
 	muerto = true
 	animated_sprite.play("dead")
 
-	# Desactivar colisiones y movimiento
 	$CollisionShape2D.disabled = true
 	set_physics_process(false)
 
-	# Esperar un pequeño tiempo o el final de la animación antes del cambio de escena
 	await get_tree().create_timer(1.2).timeout
 
-	# Cambiar a la pantalla de Game Over
-	if game_over_scene:
-		get_tree().change_scene_to_packed(game_over_scene)
-	else:
-		push_error(" No se pudo cargar la escena GameOverScreen.tscn")
-
+	emit_signal("player_died") 
 
 func _on_animation_finished():
 	if muerto:

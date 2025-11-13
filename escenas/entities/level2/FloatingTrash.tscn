@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddfoh24u0jkp6"]
 
-[ext_resource type="Script" uid="uid://5mfok6rk2wfl" path="res://scripts/entities/floating_trash.gd" id="1_2vabc"]
+[ext_resource type="Script" uid="uid://5mfok6rk2wfl" path="res://scripts/obstacles/level2/floating_trash.gd" id="1_2vabc"]
 [ext_resource type="Texture2D" uid="uid://cvy6ryr26jb64" path="res://assets/obstacle/Bolsa.png" id="2_0fe6t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fe6t"]

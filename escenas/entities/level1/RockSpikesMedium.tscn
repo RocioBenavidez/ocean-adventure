@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bp85amvh4601x"]
 
-[ext_resource type="Script" uid="uid://cakiyf2wqhv7f" path="res://scripts/entities/rock_spikes_medium.gd" id="1_ippyx"]
+[ext_resource type="Script" uid="uid://cakiyf2wqhv7f" path="res://scripts/obstacles/level1/rock_spikes_medium.gd" id="1_ippyx"]
 [ext_resource type="Texture2D" uid="uid://deyhba2o4twvt" path="res://assets/obstacle/RocaMediana.png" id="2_1hcf3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8k3u"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://clfkc3ngxol67"]
 
-[ext_resource type="Script" uid="uid://4sdv1l63ktwd" path="res://scripts/entities/rock_medium_level_2.gd" id="1_21s3b"]
+[ext_resource type="Script" uid="uid://4sdv1l63ktwd" path="res://scripts/obstacles/level2/rock_medium_level_2.gd" id="1_21s3b"]
 [ext_resource type="Texture2D" uid="uid://b27sh8ok5fltb" path="res://assets/obstacle/obstaculolevel2.png" id="1_cj5rx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_21s3b"]

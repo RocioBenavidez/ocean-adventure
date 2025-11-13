@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://car0nyp3vhhan"]
 
-[ext_resource type="Script" uid="uid://c3jtkw2w7di5m" path="res://scripts/entities/fish_enemy_level_2.gd" id="1_cinf0"]
+[ext_resource type="Script" uid="uid://c3jtkw2w7di5m" path="res://scripts/obstacles/level2/fish_enemy_level_2.gd" id="1_cinf0"]
 [ext_resource type="Texture2D" uid="uid://cxklda4nxyr5m" path="res://assets/obstacle/tiburonGris.png" id="2_fg62s"]
 
 [node name="FishEnemyLevel2" type="Node2D"]

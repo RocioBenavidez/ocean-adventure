@@ -1,7 +1,6 @@
 extends Control
 
-@onready var menu_scene = preload("res://escenas/HUB/menu.tscn")
-
+signal back_to_menu  # 👈 definimos la señal
 
 func _on_timer_timeout():
-	get_tree().change_scene_to_file("res://escenas/HUB/menu.tscn")
+	emit_signal("back_to_menu")

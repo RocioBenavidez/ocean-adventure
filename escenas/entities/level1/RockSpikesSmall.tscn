@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bplj68fvdn3fv"]
 
-[ext_resource type="Script" uid="uid://be7sonot8s1fl" path="res://scripts/entities/rock_spikes_small.gd" id="1_csn7f"]
+[ext_resource type="Script" uid="uid://be7sonot8s1fl" path="res://scripts/obstacles/level1/rock_spikes_small.gd" id="1_csn7f"]
 [ext_resource type="Texture2D" uid="uid://rta61t12m2p7" path="res://assets/obstacle/RocaChica.png" id="2_103gs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0iytc"]
