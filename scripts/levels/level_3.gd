@@ -22,7 +22,7 @@ func spawn_player():
 	player.vida = Global.vida_player
 	
 	add_child(player)
-	player.connect("player_died", Callable(get_node("/root/GameManager"), "on_player_died"))
+	player.connect("player_died", Callable(get_node("/root/main/GameManager"), "on_player_died"))
 
 	print("Jugador instanciado con vida:", player.vida)
 

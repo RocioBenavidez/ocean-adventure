@@ -1,97 +1,125 @@
 extends Node
 
-@onready var menu_scene = preload("res://escenas/HUB/menu.tscn")
+signal request_save_score
+signal request_reset_score
+signal request_add_points(amount: int)
+signal player_name_set(nombre: String)
+
+@onready var menu_scene = preload("res://escenas/screens/menu.tscn")
+@onready var guide_scene = preload("res://escenas/screens/Guide.tscn")
 @onready var hud_scene = preload("res://escenas/HUB/HUD.tscn")
 @onready var ranking_scene = preload("res://escenas/HUB/Ranking.tscn")
+@onready var win_scene = preload("res://escenas/screens/WinScreen.tscn")
 
-const SAVE_PATH := "user://ranking.json"
-
-var current_menu: Node
-var current_level: Node
-var current_hud: Node
-var puntos: int = 0
-var jugador_nombre := ""
-var current_level_index := 0
-
-var levels := [
+@onready var levels = [
 	preload("res://escenas/levels/Level1.tscn"),
 	preload("res://escenas/levels/Level2.tscn"),
 	preload("res://escenas/levels/Level3.tscn")
 ]
 
+var current_scene: Node
+var jugador_nombre := ""
+var current_level_index := 0
+
 func _ready():
-	show_menu()
+	print("🎮 GameManager iniciado")
+	var menu = menu_scene.instantiate()
+	_load_scene(menu)
+	print("Menú cargado correctamente")
 
-func show_menu():
-	if current_menu:
-		current_menu.queue_free()
+	await get_tree().process_frame
+	print("Nodos hijos actuales:", get_tree().root.get_children())
 
-	current_menu = menu_scene.instantiate()
-	add_child(current_menu)
+func _load_scene(new_scene: Node):
+	# Diferimos la carga de la nueva escena para evitar conflictos con la física
+	call_deferred("_do_load_scene", new_scene)
 
-	current_menu.connect("start_game", Callable(self, "_on_start_game"))
-	current_menu.connect("open_ranking", Callable(self, "_on_open_ranking"))
 
+func _do_load_scene(new_scene: Node):
+	# Eliminamos la escena actual si existe
+	if current_scene:
+		current_scene.queue_free()
+
+	# Cargamos la nueva escena
+	current_scene = new_scene
+	add_child(current_scene)
+
+	# Conectamos señales del menú si las tiene
+	if current_scene.has_signal("start_game"):
+		current_scene.connect("start_game", Callable(self, "_on_start_game"))
+	if current_scene.has_signal("open_ranking"):
+		current_scene.connect("open_ranking", Callable(self, "_on_open_ranking"))
+	if current_scene.has_signal("back_to_menu"):
+		current_scene.connect("back_to_menu", Callable(self, "_on_back_to_menu"))
+		
 func _on_start_game(nombre: String):
 	jugador_nombre = nombre
-	puntos = 0
-	start_level(0)
+	emit_signal("player_name_set", nombre)
+	emit_signal("request_reset_score")
+	_show_guide()
 
-func start_level(index: int):
-	if current_level:
-		current_level.queue_free()
-	if current_hud:
-		current_hud.queue_free()
-	if current_menu:
-		current_menu.queue_free()
+func _show_guide():
+	var guide = guide_scene.instantiate()
+	_load_scene(guide)
+	guide.connect("guide_skipped", Callable(self, "_on_guide_skipped"))
 
+func _on_guide_skipped():
+	print("📘 Guía omitida → iniciando nivel 1...")
+	_start_level(0)
+
+func _start_level(index: int):
+	emit_signal("request_add_points", 0)
 	current_level_index = index
-	current_level = levels[index].instantiate()
-	add_child(current_level)
 
-	current_hud = hud_scene.instantiate()
-	add_child(current_hud)
+	var level = levels[index].instantiate()
+	_load_scene(level)
 
-	var player = current_level.get_node_or_null("Player")
+	var hud = hud_scene.instantiate()
+	add_child(hud)
+
+	# 👇 CONECTAR EVENTO DE NIVEL COMPLETADO
+	level.connect("level_completed", Callable(self, "_on_level_completed"))
+
+	# Conexión con el jugador
+	var player = level.get_node_or_null("Player")
 	if player:
-		player.connect("player_died", Callable(self, "on_player_died"))
+		player.connect("player_died", Callable(self, "_on_player_died"))
 		player.connect("comer_comida", Callable(self, "_on_player_comer_comida"))
 
-	current_hud.connect("time_over", Callable(self, "on_time_over"))
-	current_hud.update_score(puntos) # función que deberás crear en el HUD
+	# Conexión con HUD
+	hud.connect("time_over", Callable(self, "_on_time_over"))
+	hud.connect("tiempo_tick", Callable(self, "_on_tiempo_tick"))
 
-func _on_player_comer_comida(tiempo_extra: int):
-	puntos += 10
-	if current_hud:
-		current_hud.update_score(puntos)
-	print("Puntos:", puntos)
+func _on_level_completed():
+	print("Nivel completado:", current_level_index)
+	var next_index = current_level_index + 1
 
-func save_score(score: int):
-	var scores = load_scores()
+	if next_index < levels.size():
+		print("⏭ Cargando nivel", next_index + 1)
+		call_deferred("_start_level", next_index)  # 👈 solo esto, no lo llames directo
+	else:
+		print("🎉 Todos los niveles completados. Mostrando ranking...")
+		emit_signal("request_save_score")
+		call_deferred("_load_scene", ranking_scene.instantiate())  # 👈 solo esta línea
 
-	var entry = {
-		"name": jugador_nombre,
-		"score": score,
-		"date": Time.get_datetime_string_from_system()
-	}
 
-	scores.append(entry)
-	scores.sort_custom(func(a, b): return b["score"] < a["score"])
 
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	file.store_string(JSON.stringify(scores, "\t"))
-	file.close()
+func _on_player_comer_comida(extra_time: int):
+	emit_signal("request_add_points", 10)
 
-	print("Puntuación guardada:", entry)
-	
-func load_scores() -> Array:
-	if not FileAccess.file_exists(SAVE_PATH): 
-		return [] 
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ) 
-	var data = file.get_as_text() 
-	file.close() 
-	var result = JSON.parse_string(data)
-	if typeof(result) == TYPE_ARRAY:
-		return result 
-	else: 
-		return []
+func _on_tiempo_tick():
+	emit_signal("request_add_points", 1)
+
+func _on_player_died():
+	emit_signal("request_save_score")
+	_load_scene(ranking_scene.instantiate())
+
+func _on_time_over():
+	emit_signal("request_save_score")
+	_load_scene(ranking_scene.instantiate())
+
+func _on_open_ranking():
+	_load_scene(ranking_scene.instantiate())
+
+func _on_back_to_menu():
+	_load_scene(menu_scene.instantiate())

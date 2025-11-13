@@ -1,8 +1,8 @@
 extends Control
 
-const SAVE_PATH := "user://ranking.json"
+const SAVE_PATH := "res://ranking.json"
 
-@onready var scores_list = $ScoresList
+@onready var scores_list = $ScoreList
 @onready var back_button = $BackButton
 
 signal back_to_menu

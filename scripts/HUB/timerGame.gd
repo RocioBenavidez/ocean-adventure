@@ -13,12 +13,11 @@ signal timer_updated(minutes, seconds, msec)
 
 func _ready():
 	set_process(true)
-
-var player = get_tree().get_root().get_node("C:/Users/Usuario/OneDrive/Documentos/GameProyect/ocean-adventure/scripts/entities/player.gd")
-if player:
-	player.connect("helth_changed", self, "_on_player_health_changed")
-	player.connect("energy_changed", self, "_on_player_energy_changed")
-
+	
+	var player = get_tree().get_root().get_node("C:/Users/Usuario/OneDrive/Documentos/GameProyect/ocean-adventure/scripts/entities/player.gd")
+	if player:
+		player.connect("helth_changed", self, "_on_player_health_changed")
+		player.connect("energy_changed", self, "_on_player_energy_changed")
 
 func update_score(value: int):
 	score_label.text = "Puntos: %s" % value

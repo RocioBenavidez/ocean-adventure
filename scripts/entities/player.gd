@@ -8,7 +8,7 @@ signal player_died
 @export var vida: int = 100
 @export var energia: int = 0
 @onready var animated_sprite: AnimatedSprite2D = $AnimateSprite
-@onready var game_over_scene = preload("res://escenas/HUB/GameOverScreen.tscn")
+@onready var game_over_scene = preload("res://escenas/screens/GameOverScreen.tscn")
 
 var muerto: bool = false  
 
@@ -49,6 +49,7 @@ func _on_area_entered(area):
 	if area is Food:
 		emit_signal("comer_comida", area.bonus)
 		consumir_comida(area.bonus)
+		Global.set_score()
 		area.queue_free()
 		return
 	

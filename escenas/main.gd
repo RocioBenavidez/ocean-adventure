@@ -1,29 +1,44 @@
 extends Node
 
-# Cargamos el menú principal
-var menu_scene: PackedScene = preload("res://escenas/HUB/menu.tscn")
-var current_scene: Node = null
+@onready var game_manager_scene = preload("res://scripts/GameManager.tscn")
+@onready var score_manager_script = preload("res://scripts/ScoreManager.gd")
+
+var game_manager: Node
+var score_manager: Node
+
+
 
 func _ready():
-	load_scene(menu_scene)
+	print("🟢 Main cargó correctamente")
 
-# Función para cargar una escena (menú, juego, etc.)
-func load_scene(scene_packed: PackedScene):
-	if current_scene:
-		current_scene.queue_free()  # eliminar escena anterior
-	current_scene = scene_packed.instantiate()
-	add_child(current_scene)
-	# Conectamos las señales del menú si existen
-	if current_scene.has_signal("start_game"):
-		current_scene.connect("start_game", Callable(self, "_on_start_game"))
-	if current_scene.has_signal("open_ranking"):
-		current_scene.connect("open_ranking", Callable(self, "_on_open_ranking"))
-		
-func _on_start_game():
-	var game_scene = preload("res://escenas/HUB/GameManager.tscn")
-	load_scene(game_scene)
+	# Instanciar ScoreManager a partir del script (no de una escena)
+	score_manager = score_manager_script.new()
+	add_child(score_manager)
 
+	# Registrar como variable global (opcional)
+	# Así podés acceder con `Global.score_manager` o similar si lo usás
+	ProjectSettings.set_setting("application/config/score_manager", score_manager)
 
-#func _on_open_ranking():
-	#var ranking_scene: PackedScene = preload("res://escenas/HUB/ranking.tscn")
-	#load_scene(ranking_scene)
+	game_manager = game_manager_scene.instantiate()
+	add_child(game_manager)
+
+	# Conexión entre managers
+	game_manager.connect("request_save_score", Callable(self, "_on_request_save_score"))
+	game_manager.connect("request_reset_score", Callable(self, "_on_request_reset_score"))
+	game_manager.connect("request_add_points", Callable(self, "_on_request_add_points"))
+
+	# 🆕 Conexión para recibir el nombre del jugador
+	game_manager.connect("player_name_set", Callable(self, "_on_player_name_set"))
+
+func _on_request_save_score():
+	score_manager.save_score()
+
+func _on_request_reset_score():
+	score_manager.reset()
+
+func _on_request_add_points(amount: int):
+	score_manager.add_points(amount)
+	
+func _on_player_name_set(nombre: String):
+	score_manager.current_player_name = nombre
+	print("👤 Nombre del jugador guardado:", nombre)

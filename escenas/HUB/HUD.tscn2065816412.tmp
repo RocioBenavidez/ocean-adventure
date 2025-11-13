@@ -11,6 +11,7 @@
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_jd13s")
+tiempo_inicial = null
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 anchors_preset = 1
