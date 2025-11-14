@@ -18,7 +18,7 @@ func _ready():
 	animated_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if muerto:
 		velocity = Vector2.ZERO  
 		return
@@ -38,7 +38,7 @@ func _physics_process(delta):
 		$AnimateSprite.flip_h = velocity.x < 0
 
 
-func consumir_comida(food: int):
+func consumir_comida():
 	animated_sprite.play("comiendo")
 
 
@@ -48,8 +48,8 @@ func _on_area_entered(area):
 
 	if area is Food:
 		emit_signal("comer_comida", area.bonus)
-		consumir_comida(area.bonus)
-		Global.set_score()
+		consumir_comida()
+		Global.sum_score()
 		area.queue_free()
 		return
 	
@@ -57,6 +57,7 @@ func _on_area_entered(area):
 	if obstacle_node.has_method("get_obstacle_info"):
 		var info = obstacle_node.get_obstacle_info()
 		quitar_vida(info["damage"])
+		Global.rest_score()
 
 
 func quitar_vida(cantidad: int):

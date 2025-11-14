@@ -1,12 +1,13 @@
 extends Control
 
 signal start_game
-signal open_ranking
 
 @onready var name_input: LineEdit = $VBoxContainer/name_input
+@onready var ranking_panel = $Ranking
 
 func _ready():
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	ranking_panel.visible = false
 	print("Menú cargado correctamente")
 
 func _on_play_pressed():
@@ -16,4 +17,8 @@ func _on_play_pressed():
 	emit_signal("start_game", nombre)
 
 func _on_ranking_pressed():
-	emit_signal("open_ranking")
+	ranking_panel.visible = true
+	ranking_panel.connect("back_to_menu", Callable(self, "_on_back_from_ranking"))
+	
+func _on_back_from_ranking():
+	ranking_panel.visible = false
