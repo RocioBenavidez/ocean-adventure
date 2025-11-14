@@ -47,8 +47,6 @@ func _do_load_scene(new_scene: Node):
 	# Conectamos señales del menú si las tiene
 	if current_scene.has_signal("start_game"):
 		current_scene.connect("start_game", Callable(self, "_on_start_game"))
-	if current_scene.has_signal("open_ranking"):
-		current_scene.connect("open_ranking", Callable(self, "_on_open_ranking"))
 	if current_scene.has_signal("back_to_menu"):
 		current_scene.connect("back_to_menu", Callable(self, "_on_back_to_menu"))
 		
@@ -84,7 +82,7 @@ func _start_level(index: int):
 	var player = level.get_node_or_null("Player")
 	if player:
 		player.connect("player_died", Callable(self, "_on_player_died"))
-		player.connect("comer_comida", Callable(self, "_on_player_comer_comida"))
+
 
 	# Conexión con HUD
 	hud.connect("time_over", Callable(self, "_on_time_over"))
@@ -104,8 +102,7 @@ func _on_level_completed():
 
 
 
-func _on_player_comer_comida(extra_time: int):
-	emit_signal("request_add_points", 10)
+
 
 func _on_tiempo_tick():
 	emit_signal("request_add_points", 1)
@@ -119,7 +116,9 @@ func _on_time_over():
 	_load_scene(ranking_scene.instantiate())
 
 func _on_open_ranking():
-	_load_scene(ranking_scene.instantiate())
+	var ranking = ranking_scene.instantiate()
+	get_tree().current_scene.add_child(ranking)
+
 
 func _on_back_to_menu():
 	_load_scene(menu_scene.instantiate())

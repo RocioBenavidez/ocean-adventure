@@ -1,9 +1,9 @@
 extends Control
 
-const SAVE_PATH := "res://ranking.json"
+const SAVE_PATH := "user://ranking.json"
 
-@onready var scores_list = $ScoreList
-@onready var back_button = $BackButton
+@onready var scores_list = $Panel/ScoreList
+@onready var back_button = $Panel/BackButton
 
 signal back_to_menu
 
@@ -14,10 +14,13 @@ func _ready():
 func _on_back_pressed():
 	emit_signal("back_to_menu")
 
-func show_scores():
-	scores_list.queue_free_children()  # limpia la lista antes de mostrar
 
-	var scores = load_scores()
+func show_scores():
+	# Limpiar lista
+	for child in scores_list.get_children():
+		child.queue_free()
+
+	var scores = ScoreManager.load_scores()
 	if scores.is_empty():
 		var label = Label.new()
 		label.text = "No hay puntajes guardados todavía."
@@ -44,7 +47,7 @@ func load_scores() -> Array:
 	file.close()
 
 	var result = JSON.parse_string(data)
-	if typeof(result) == TYPE_ARRAY:
+	if result is Array:
 		return result
-	else:
-		return []
+
+	return []

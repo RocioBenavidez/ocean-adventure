@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://by7upjxxugctk"]
+[gd_scene load_steps=7 format=3 uid="uid://by7upjxxugctk"]
 
 [ext_resource type="Script" uid="uid://cjfcw03pq8c4d" path="res://scripts/HUB/menu.gd" id="1_vf5c6"]
 [ext_resource type="Texture2D" uid="uid://b8sx4eq7uwavw" path="res://assets/ui/Aventura en el Océano.png" id="2_vajnu"]
+[ext_resource type="PackedScene" uid="uid://pu1iukc3m7ta" path="res://escenas/HUB/Ranking.tscn" id="3_vajnu"]
 
 [sub_resource type="SystemFont" id="SystemFont_rscdm"]
 subpixel_positioning = 0
@@ -70,5 +71,15 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxFlat_d7r87")
 text = "RANKING"
 
+[node name="Ranking" parent="." instance=ExtResource("3_vajnu")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = -291.0
+offset_top = -644.0
+offset_right = 260.0
+offset_bottom = 46.0
+grow_vertical = 1
+
 [connection signal="pressed" from="VBoxContainer/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Ranking" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Ranking" to="." method="_on_ranking_pressed"]

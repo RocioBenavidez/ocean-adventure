@@ -9,6 +9,10 @@ func reset():
 	vida_player = 100
 	score = 0
 
-func set_score():
+func sum_score():
 	score += 50
+	emit_signal("update_s",score)
+
+func rest_score():
+	score -= 10
 	emit_signal("update_s",score)
