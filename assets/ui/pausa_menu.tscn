@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh86w8fjm7qvt"]
+
+[ext_resource type="Script" uid="uid://cl46e4cc7d5wb" path="res://assets/ui/pausa_menu.gd" id="1_gfrh7"]
+[ext_resource type="Texture2D" uid="uid://bgo25ortfj2bu" path="res://assets/ui/Escena_Pausa.png" id="2_r1svn"]
+
+[node name="PausaMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_gfrh7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r1svn")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -311.0
+offset_right = 117.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 31.0
+offset_right = 225.0
+offset_bottom = 251.0
+
+[node name="Button_Reanudar" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Reanudar"
+
+[node name="Button_Restart" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Button_Exit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Button_Reanudar" to="." method="_on_button_reanudar_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Button_Restart" to="." method="_on_button_restart_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Button_Exit" to="." method="_on_button_exit_pressed"]
