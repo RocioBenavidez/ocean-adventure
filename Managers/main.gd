@@ -1,7 +1,7 @@
 extends Node
 
-@onready var game_manager_scene = preload("res://scripts/GameManager.tscn")
-@onready var score_manager_script = preload("res://scripts/ScoreManager.gd")
+@onready var game_manager_scene = preload("res://Managers/GameManager.tscn")
+@onready var score_manager_script = preload("res://Managers/ScoreManager.gd")
 
 var game_manager: Node
 var score_manager: Node

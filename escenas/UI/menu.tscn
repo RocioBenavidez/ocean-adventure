@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://by7upjxxugctk"]
 
-[ext_resource type="Script" uid="uid://cjfcw03pq8c4d" path="res://scripts/HUB/menu.gd" id="1_vf5c6"]
-[ext_resource type="Texture2D" uid="uid://b8sx4eq7uwavw" path="res://assets/ui/Aventura en el Océano.png" id="2_vajnu"]
-[ext_resource type="PackedScene" uid="uid://pu1iukc3m7ta" path="res://escenas/HUB/Ranking.tscn" id="3_vajnu"]
+[ext_resource type="Script" uid="uid://cjfcw03pq8c4d" path="res://scripts/UI/menu.gd" id="1_rpkiu"]
+[ext_resource type="Texture2D" uid="uid://b8sx4eq7uwavw" path="res://assets/ui/Aventura en el Océano.png" id="2_brffn"]
+[ext_resource type="PackedScene" uid="uid://pu1iukc3m7ta" path="res://escenas/UI/Ranking.tscn" id="3_dgj5e"]
 
 [sub_resource type="SystemFont" id="SystemFont_rscdm"]
 subpixel_positioning = 0
@@ -20,7 +20,7 @@ offset_left = 584.0
 offset_top = 623.0
 offset_right = 584.0
 offset_bottom = 623.0
-script = ExtResource("1_vf5c6")
+script = ExtResource("1_rpkiu")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -30,7 +30,7 @@ offset_left = -584.0
 offset_top = -619.0
 offset_right = 567.0
 offset_bottom = 24.0
-texture = ExtResource("2_vajnu")
+texture = ExtResource("2_brffn")
 expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -71,7 +71,7 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxFlat_d7r87")
 text = "RANKING"
 
-[node name="Ranking" parent="." instance=ExtResource("3_vajnu")]
+[node name="Ranking" parent="." instance=ExtResource("3_dgj5e")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0

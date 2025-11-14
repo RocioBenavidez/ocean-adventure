@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://e6y6w15ef120"]
 
-[ext_resource type="Script" path="res://scripts/HUB/game_over_screen.gd" id="1_chx74"]
+[ext_resource type="Script" uid="uid://d05dptgrijn16" path="res://scripts/Screens/game_over_screen.gd" id="1_chx74"]
 [ext_resource type="Texture2D" uid="uid://cshv0radqnj5v" path="res://assets/ui/Game_Over_Life.png" id="1_mrkg2"]
 
 [node name="GameOverScreen" type="Control"]

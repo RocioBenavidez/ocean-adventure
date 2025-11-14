@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ygmjrujv8nwt"]
 
-[ext_resource type="Script" uid="uid://c8h1hhhxjlpu5" path="res://scripts/HUB/game_over_time_screen.gd" id="1_30jor"]
+[ext_resource type="Script" uid="uid://c8h1hhhxjlpu5" path="res://scripts/Screens/game_over_time_screen.gd" id="1_30jor"]
 [ext_resource type="Texture2D" uid="uid://dfwkeh3hqdde1" path="res://assets/ui/Game_Over_Time.png" id="1_vwd5d"]
 [ext_resource type="Script" uid="uid://njcp85mot58w" path="res://scripts/HUB/label.gd" id="3_l8odp"]
 
