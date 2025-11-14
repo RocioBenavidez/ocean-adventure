@@ -43,7 +43,6 @@ func _ready() -> void:
 	pausa_menu.hide()
 
 	pausa_menu.resume_pressed.connect(_on_pause_resume)
-	pausa_menu.restart_pressed.connect(_on_pause_restart)
 	pausa_menu.exit_pressed.connect(_on_pause_exit)
 
 func _unhandled_input(event):
@@ -125,12 +124,6 @@ func _on_level_completed() -> void:
 func _on_pause_resume():
 	get_tree().paused = false
 	pausa_menu.hide()
-
-func _on_pause_restart():
-	print("Reiniciando nivel...")
-	get_tree().paused = false
-	pausa_menu.hide()
-	_start_level(current_level_index)
 
 func _on_pause_exit():
 	get_tree().paused = false
