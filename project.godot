@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-ScoreManager="*res://scripts/ScoreManager.gd"
+Global="*res://Managers/global.gd"
+ScoreManager="*res://Managers/ScoreManager.gd"
 
 [display]
 

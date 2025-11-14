@@ -5,10 +5,10 @@ signal request_reset_score
 signal request_add_points(amount: int)
 signal player_name_set(nombre: String)
 
-@onready var menu_scene = preload("res://escenas/screens/menu.tscn")
+@onready var menu_scene = preload("res://escenas/UI/menu.tscn")
 @onready var guide_scene = preload("res://escenas/screens/Guide.tscn")
 @onready var hud_scene = preload("res://escenas/HUB/HUD.tscn")
-@onready var ranking_scene = preload("res://escenas/HUB/Ranking.tscn")
+@onready var ranking_scene = preload("res://escenas/UI/Ranking.tscn")
 @onready var win_scene = preload("res://escenas/screens/WinScreen.tscn")
 
 @onready var levels = [

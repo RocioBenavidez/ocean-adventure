@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://g6cqjy2k42q7"]
 
-[ext_resource type="Script" uid="uid://by65pc4d3mtt5" path="res://escenas/screens/guide.gd" id="1_v1mqv"]
+[ext_resource type="Script" uid="uid://by65pc4d3mtt5" path="res://scripts/Screens/guide.gd" id="1_v1mqv"]
 [ext_resource type="Texture2D" uid="uid://cks5bddcxr7yx" path="res://assets/ui/Guia.png" id="1_wxkxq"]
 
 [sub_resource type="FontVariation" id="FontVariation_wxkxq"]
