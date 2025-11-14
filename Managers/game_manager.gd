@@ -6,6 +6,7 @@ signal request_add_points(amount: int)
 signal player_name_set(nombre: String)
 
 @onready var menu_scene = preload("res://escenas/UI/menu.tscn")
+@onready var pausa_menu_scene = preload("res://escenas/UI/Pausa_Menu.tscn")
 @onready var guide_scene = preload("res://escenas/screens/Guide.tscn")
 @onready var hud_scene = preload("res://escenas/HUB/HUD.tscn")
 @onready var ranking_scene = preload("res://escenas/UI/Ranking.tscn")
@@ -20,6 +21,7 @@ signal player_name_set(nombre: String)
 var current_scene: Node
 var jugador_nombre := ""
 var current_level_index := 0
+var pausa_menu
 
 func _ready():
 	print("🎮 GameManager iniciado")
@@ -29,6 +31,19 @@ func _ready():
 
 	await get_tree().process_frame
 	print("Nodos hijos actuales:", get_tree().root.get_children())
+
+	# Crear UNA SOLA instancia de pausa
+	pausa_menu = pausa_menu_scene.instantiate()
+	add_child(pausa_menu)
+	pausa_menu.hide()
+
+	pausa_menu.resume_pressed.connect(_on_pause_resume)
+	pausa_menu.restart_pressed.connect(_on_pause_restart)
+	pausa_menu.exit_pressed.connect(_on_pause_exit)
+	
+func _unhandled_input(event):
+	if event.is_action_pressed("pausa"):
+		_toggle_pause()
 
 func _load_scene(new_scene: Node):
 	# Diferimos la carga de la nueva escena para evitar conflictos con la física
@@ -101,8 +116,28 @@ func _on_level_completed():
 		call_deferred("_load_scene", ranking_scene.instantiate())  # 👈 solo esta línea
 
 
+func _on_pause_resume():
+	get_tree().paused = false
+	pausa_menu.hide()
 
+func _on_pause_restart():
+	print("Reiniciando nivel...")
+	get_tree().paused = false
+	pausa_menu.hide()
+	_start_level(current_level_index)
 
+func _on_pause_exit():
+	get_tree().paused = false
+	pausa_menu.hide()
+	_load_scene(menu_scene.instantiate())
+
+func _toggle_pause():
+	get_tree().paused = not get_tree().paused
+	if pausa_menu:
+		if get_tree().paused:
+			pausa_menu.show()
+		else:
+			pausa_menu.hide()
 
 func _on_tiempo_tick():
 	emit_signal("request_add_points", 1)
