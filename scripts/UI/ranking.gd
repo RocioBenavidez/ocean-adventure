@@ -1,7 +1,5 @@
 extends Control
 
-const SAVE_PATH := "user://ranking.json"
-
 @onready var scores_list = $Panel/ScoreList
 @onready var back_button = $Panel/BackButton
 
@@ -14,40 +12,33 @@ func _ready():
 func _on_back_pressed():
 	emit_signal("back_to_menu")
 
-
 func show_scores():
-	# Limpiar lista
+	# Limpiar contenedor
 	for child in scores_list.get_children():
 		child.queue_free()
 
-	var scores = ScoreManager.load_scores()
+	var scores: Array = ScoreManager.get_ranking()
+
 	if scores.is_empty():
 		var label = Label.new()
 		label.text = "No hay puntajes guardados todavía."
 		scores_list.add_child(label)
 		return
 
-	for i in range(scores.size()):
-		var entry = scores[i]
+	# 🔥 Ordenar por score (mayor → menor)
+	scores.sort_custom(func(a, b):
+		return int(b["score"]) - int(a["score"])
+	)
+
+	# 🔥 Quedarse solo con los 10 primeros
+	var top_10 := scores.slice(0, 10)
+
+	# 🔥 Mostrar
+	for i in range(top_10.size()):
+		var entry = top_10[i]
+		var name := str(entry.get("name", "Jugador"))
+		var score_val := int(entry.get("score", 0))
+
 		var label = Label.new()
-		label.text = "%d. %s — %d puntos (%s)" % [
-			i + 1,
-			entry["name"],
-			entry["score"],
-			entry["date"]
-		]
+		label.text = "%d. %s — %d puntos" % [i + 1, name, score_val]
 		scores_list.add_child(label)
-
-func load_scores() -> Array:
-	if not FileAccess.file_exists(SAVE_PATH):
-		return []
-
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	var data = file.get_as_text()
-	file.close()
-
-	var result = JSON.parse_string(data)
-	if result is Array:
-		return result
-
-	return []

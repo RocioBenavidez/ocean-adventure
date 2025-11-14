@@ -11,8 +11,10 @@ func reset():
 
 func sum_score():
 	score += 50
+	ScoreManager.add_points(50)
 	emit_signal("update_s",score)
 
 func rest_score():
 	score -= 10
+	ScoreManager.add_points(-10)
 	emit_signal("update_s",score)

@@ -1,3 +1,4 @@
+# GameManager.gd
 extends Node
 
 signal request_save_score
@@ -9,8 +10,9 @@ signal player_name_set(nombre: String)
 @onready var pausa_menu_scene = preload("res://escenas/UI/Pausa_Menu.tscn")
 @onready var guide_scene = preload("res://escenas/screens/Guide.tscn")
 @onready var hud_scene = preload("res://escenas/HUB/HUD.tscn")
-@onready var ranking_scene = preload("res://escenas/UI/Ranking.tscn")
 @onready var win_scene = preload("res://escenas/screens/WinScreen.tscn")
+@onready var game_over_time = preload("res://escenas/screens/GameOverTimeScreen.tscn")
+@onready var game_over = preload("res://escenas/screens/GameOverScreen.tscn")
 
 @onready var levels = [
 	preload("res://escenas/levels/Level1.tscn"),
@@ -18,13 +20,16 @@ signal player_name_set(nombre: String)
 	preload("res://escenas/levels/Level3.tscn")
 ]
 
-var current_scene: Node
+var hud_instance: Node = null
+var current_scene: Node = null
 var jugador_nombre := ""
 var current_level_index := 0
 var pausa_menu
 
-func _ready():
+func _ready() -> void:
 	print("🎮 GameManager iniciado")
+
+	# Cargamos el menú principal
 	var menu = menu_scene.instantiate()
 	_load_scene(menu)
 	print("Menú cargado correctamente")
@@ -32,7 +37,7 @@ func _ready():
 	await get_tree().process_frame
 	print("Nodos hijos actuales:", get_tree().root.get_children())
 
-	# Crear UNA SOLA instancia de pausa
+	# Crear UNA SOLA instancia del menú de pausa
 	pausa_menu = pausa_menu_scene.instantiate()
 	add_child(pausa_menu)
 	pausa_menu.hide()
@@ -40,81 +45,82 @@ func _ready():
 	pausa_menu.resume_pressed.connect(_on_pause_resume)
 	pausa_menu.restart_pressed.connect(_on_pause_restart)
 	pausa_menu.exit_pressed.connect(_on_pause_exit)
-	
+
 func _unhandled_input(event):
 	if event.is_action_pressed("pausa"):
 		_toggle_pause()
 
-func _load_scene(new_scene: Node):
-	# Diferimos la carga de la nueva escena para evitar conflictos con la física
+# FUSIÓN DE AMBAS VERSIONES: tu comentario + la lógica de develop
+func _load_scene(new_scene: Node) -> void:
+	# Diferimos la carga para evitar problemas con physics/scene tree
 	call_deferred("_do_load_scene", new_scene)
 
-
-func _do_load_scene(new_scene: Node):
-	# Eliminamos la escena actual si existe
+func _do_load_scene(new_scene: Node) -> void:
 	if current_scene:
 		current_scene.queue_free()
+		current_scene = null
 
-	# Cargamos la nueva escena
 	current_scene = new_scene
 	add_child(current_scene)
 
-	# Conectamos señales del menú si las tiene
 	if current_scene.has_signal("start_game"):
 		current_scene.connect("start_game", Callable(self, "_on_start_game"))
+
 	if current_scene.has_signal("back_to_menu"):
 		current_scene.connect("back_to_menu", Callable(self, "_on_back_to_menu"))
-		
-func _on_start_game(nombre: String):
+
+func _on_start_game(nombre: String) -> void:
 	jugador_nombre = nombre
 	emit_signal("player_name_set", nombre)
 	emit_signal("request_reset_score")
 	_show_guide()
 
-func _show_guide():
+func _show_guide() -> void:
 	var guide = guide_scene.instantiate()
 	_load_scene(guide)
-	guide.connect("guide_skipped", Callable(self, "_on_guide_skipped"))
 
-func _on_guide_skipped():
+	if guide.has_signal("guide_skipped"):
+		guide.connect("guide_skipped", Callable(self, "_on_guide_skipped"))
+
+func _on_guide_skipped() -> void:
 	print("📘 Guía omitida → iniciando nivel 1...")
+
+	if hud_instance == null:
+		hud_instance = hud_scene.instantiate()
+		hud_instance.name = "HUD"
+		add_child(hud_instance)
+		print("HUD instanciado luego de la guía")
+
 	_start_level(0)
 
-func _start_level(index: int):
+func _start_level(index: int) -> void:
 	emit_signal("request_add_points", 0)
 	current_level_index = index
 
 	var level = levels[index].instantiate()
 	_load_scene(level)
 
-	var hud = hud_scene.instantiate()
-	add_child(hud)
+	if hud_instance:
+		if hud_instance.has_signal("time_over"):
+			hud_instance.connect("time_over", Callable(self, "_on_time_over"), CONNECT_ONE_SHOT)
 
-	# 👇 CONECTAR EVENTO DE NIVEL COMPLETADO
-	level.connect("level_completed", Callable(self, "_on_level_completed"))
+		if hud_instance.has_signal("tiempo_tick"):
+			hud_instance.connect("tiempo_tick", Callable(self, "_on_tiempo_tick"))
 
-	# Conexión con el jugador
-	var player = level.get_node_or_null("Player")
-	if player:
-		player.connect("player_died", Callable(self, "_on_player_died"))
+	if level.has_signal("level_completed"):
+		level.connect("level_completed", Callable(self, "_on_level_completed"))
 
-
-	# Conexión con HUD
-	hud.connect("time_over", Callable(self, "_on_time_over"))
-	hud.connect("tiempo_tick", Callable(self, "_on_tiempo_tick"))
-
-func _on_level_completed():
+func _on_level_completed() -> void:
 	print("Nivel completado:", current_level_index)
 	var next_index = current_level_index + 1
 
 	if next_index < levels.size():
 		print("⏭ Cargando nivel", next_index + 1)
-		call_deferred("_start_level", next_index)  # 👈 solo esto, no lo llames directo
+		call_deferred("_start_level", next_index)
 	else:
-		print("🎉 Todos los niveles completados. Mostrando ranking...")
+		print("🎉 Todos los niveles completados. Mostrando WIN")
 		emit_signal("request_save_score")
-		call_deferred("_load_scene", ranking_scene.instantiate())  # 👈 solo esta línea
-
+		call_deferred("_load_scene", win_scene.instantiate())
 
 func _on_pause_resume():
 	get_tree().paused = false
@@ -139,21 +145,24 @@ func _toggle_pause():
 		else:
 			pausa_menu.hide()
 
-func _on_tiempo_tick():
+func _on_tiempo_tick() -> void:
 	emit_signal("request_add_points", 1)
 
-func _on_player_died():
+func _on_player_died() -> void:
 	emit_signal("request_save_score")
-	_load_scene(ranking_scene.instantiate())
+	_destroy_hud()
+	_load_scene(game_over.instantiate())
 
-func _on_time_over():
+func _on_time_over() -> void:
 	emit_signal("request_save_score")
-	_load_scene(ranking_scene.instantiate())
+	_destroy_hud()
+	_load_scene(game_over_time.instantiate())
 
-func _on_open_ranking():
-	var ranking = ranking_scene.instantiate()
-	get_tree().current_scene.add_child(ranking)
-
-
-func _on_back_to_menu():
+func _on_back_to_menu() -> void:
+	_destroy_hud()
 	_load_scene(menu_scene.instantiate())
+
+func _destroy_hud() -> void:
+	if hud_instance and is_instance_valid(hud_instance):
+		hud_instance.queue_free()
+	hud_instance = null
