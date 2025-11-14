@@ -35,7 +35,7 @@ func _on_timer_timeout():
 	# Instancia el objeto
 	var obj = object_scene.instantiate()
 	# 👉 Lo agregamos al nivel (no dentro del Spawner)
-	get_tree().current_scene.add_child(obj)
+	get_parent().add_child(obj)
 
 	# 👉 Usamos global_position para que aparezca EXACTAMENTE donde debe
 	obj.global_position = spawn_pos

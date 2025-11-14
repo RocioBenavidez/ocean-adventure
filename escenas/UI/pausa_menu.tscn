@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bh86w8fjm7qvt"]
 
-[ext_resource type="Script" uid="uid://cl46e4cc7d5wb" path="res://assets/ui/pausa_menu.gd" id="1_gfrh7"]
+[ext_resource type="Script" uid="uid://cl46e4cc7d5wb" path="res://scripts/UI/pausa_menu.gd" id="1_gfrh7"]
 [ext_resource type="Texture2D" uid="uid://bgo25ortfj2bu" path="res://assets/ui/Escena_Pausa.png" id="2_r1svn"]
 
 [node name="PausaMenu" type="CanvasLayer"]

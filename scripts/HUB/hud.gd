@@ -17,26 +17,33 @@ func _ready():
 	time_bar.min_value = 0
 	time_bar.max_value = tiempo_inicial
 	time_aro.min_value = 0
-	time_aro.max_value = tiempo_restante
+	time_aro.max_value = tiempo_inicial
 
 	set_time(tiempo_restante)
 	timer.start()
-	
-	await get_tree().process_frame  # 🕒 Espera 1 frame para que el player se instancie
+
+	# conectar con ScoreManager (autoload)
 	Global.connect("update_s", Callable(self, "update_score"))
 
+	# --- Esperar a que exista el player ---
+	await get_tree().process_frame
+
+	var player = null
+	while player == null:
+		await get_tree().process_frame
+		var players = get_tree().get_nodes_in_group("player")
+		if players.size() > 0:
+			player = players[0]
+
+	print("HUD: Player encontrado:", player)
+
+	player.connect("health_changed", Callable(self, "_on_player_health_changed"))
+	player.connect("comer_comida", Callable(self, "_on_player_comer_comida"))
+
+	# inicializar barra de vida según el player
+	set_health(player.vida)
 
 
-# Busca el primer nodo en el grupo "player"
-	var players = get_tree().get_nodes_in_group("player")
-	if players.size() > 0:
-		var player = players[0]  # en tu juego seguramente haya solo 1
-		player.connect("health_changed", Callable(self, "_on_player_health_changed"))
-		player.connect("comer_comida", Callable(self, "_on_player_comer_comida")) 
-		set_health(player.vida)  # inicializar la barra
-	else:
-		print("⚠️ No se encontró ningún nodo en el grupo 'player'")
-# 🩸 Actualiza vida
 func set_health(value: int):
 	health_bar.value = value
 
