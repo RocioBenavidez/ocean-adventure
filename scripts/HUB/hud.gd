@@ -22,10 +22,8 @@ func _ready():
 	set_time(tiempo_restante)
 	timer.start()
 
-	# conectar con ScoreManager (autoload)
 	Global.connect("update_s", Callable(self, "update_score"))
 
-	# --- Esperar a que exista el player ---
 	await get_tree().process_frame
 
 	var player = null
@@ -35,19 +33,15 @@ func _ready():
 		if players.size() > 0:
 			player = players[0]
 
-	print("HUD: Player encontrado:", player)
-
 	player.connect("health_changed", Callable(self, "_on_player_health_changed"))
 	player.connect("comer_comida", Callable(self, "_on_player_comer_comida"))
 
-	# inicializar barra de vida según el player
 	set_health(player.vida)
 
 
 func set_health(value: int):
 	health_bar.value = value
 
-# 🕒 Actualiza tiempo
 func set_time(value: int):
 	value = clamp(value, 0, tiempo_inicial)
 	var mitad = tiempo_inicial / 2.0
@@ -68,7 +62,7 @@ func _on_player_comer_comida(tiempo_extra: int):
 	tiempo_restante += tiempo_extra
 	set_time(tiempo_restante)
 
-# ⏱️ Timer
+
 func _on_timer_timeout():
 	tiempo_restante -= 1
 	set_time(tiempo_restante)
@@ -77,7 +71,7 @@ func _on_timer_timeout():
 		timer.stop()
 		emit_signal("time_over")
 
-# 🧮 NUEVO: actualiza el texto de puntos
+
 func update_score(valor: int):
 	puntos = valor
 	score_label.text = "SCORE: %d" % puntos

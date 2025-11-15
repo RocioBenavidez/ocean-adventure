@@ -32,6 +32,11 @@ func save_score():
 
 	ranking.append(entry)
 	_sort_ranking()
+
+	# limitar top 10 (opcional)
+	if ranking.size() > 10:
+		ranking = ranking.slice(0, 10)
+
 	_save_to_file()
 	print("💾 Score guardado correctamente:", entry)
 
