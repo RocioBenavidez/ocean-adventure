@@ -81,3 +81,14 @@ func _on_timer_timeout():
 func update_score(valor: int):
 	puntos = valor
 	score_label.text = "SCORE: %d" % puntos
+
+func reset_hud():
+	tiempo_restante = tiempo_inicial
+	set_time(tiempo_restante)
+
+	# reiniciar barra de vida si querés que vuelva al máximo
+	set_health(100)
+
+	# reiniciar timer
+	timer.stop()
+	timer.start()
