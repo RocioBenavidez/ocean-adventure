@@ -78,12 +78,16 @@ func morir():
 	muerto = true
 	animated_sprite.play("dead")
 
-	$CollisionShape2D.disabled = true
-	set_physics_process(false)
+	# Desactivar colisiones de forma segura
+	$CollisionShape2D.set_deferred("disabled", true)
+
+	# Desactivar física de forma segura
+	set_deferred("physics_process", false)
 
 	await get_tree().create_timer(1.2).timeout
 
-	emit_signal("player_died") 
+	emit_signal("player_died")
+
 
 func _on_animation_finished():
 	if muerto:

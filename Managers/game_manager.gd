@@ -27,17 +27,14 @@ var current_level_index := 0
 var pausa_menu
 
 func _ready() -> void:
-	print("🎮 GameManager iniciado")
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	set_process_input(true)
 
-	# Cargamos el menú principal
 	var menu = menu_scene.instantiate()
 	_load_scene(menu)
-	print("Menú cargado correctamente")
-
+	
 	await get_tree().process_frame
-	print("Nodos hijos actuales:", get_tree().root.get_children())
 
-	# Crear UNA SOLA instancia del menú de pausa
 	pausa_menu = pausa_menu_scene.instantiate()
 	add_child(pausa_menu)
 	pausa_menu.hide()
@@ -49,9 +46,8 @@ func _unhandled_input(event):
 	if event.is_action_pressed("pausa"):
 		_toggle_pause()
 
-# FUSIÓN DE AMBAS VERSIONES: tu comentario + la lógica de develop
+
 func _load_scene(new_scene: Node) -> void:
-	# Diferimos la carga para evitar problemas con physics/scene tree
 	call_deferred("_do_load_scene", new_scene)
 
 func _do_load_scene(new_scene: Node) -> void:
@@ -82,48 +78,59 @@ func _show_guide() -> void:
 		guide.connect("guide_skipped", Callable(self, "_on_guide_skipped"))
 
 func _on_guide_skipped() -> void:
-	print("📘 Guía omitida → iniciando nivel 1...")
-
 	if hud_instance == null:
 		hud_instance = hud_scene.instantiate()
 		hud_instance.name = "HUD"
 		add_child(hud_instance)
-		print("HUD instanciado luego de la guía")
-
 	_start_level(0)
 
 func _start_level(index: int) -> void:
 	emit_signal("request_add_points", 0)
 	current_level_index = index
-
 	var level = levels[index].instantiate()
 	_load_scene(level)
-
+	
 	if hud_instance:
-		if hud_instance.has_signal("time_over"):
+		if hud_instance.has_signal("time_over") and not hud_instance.is_connected("time_over", Callable(self, "_on_time_over")):
 			hud_instance.connect("time_over", Callable(self, "_on_time_over"), CONNECT_ONE_SHOT)
-
-		if hud_instance.has_signal("tiempo_tick"):
+		if hud_instance.has_signal("tiempo_tick") and not hud_instance.is_connected("tiempo_tick", Callable(self, "_on_tiempo_tick")):
 			hud_instance.connect("tiempo_tick", Callable(self, "_on_tiempo_tick"))
 
+
+	
 	if level.has_signal("level_completed"):
 		level.connect("level_completed", Callable(self, "_on_level_completed"))
+	
+	await get_tree().process_frame
+
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		var player = players[0]
+		if player.has_signal("player_died"):
+			player.connect("player_died", Callable(self, "_on_player_died"))
+	else:
+		print("No se encontró ningún nodo del grupo 'player'")	
+
+
 
 func _on_level_completed() -> void:
-	print("Nivel completado:", current_level_index)
 	var next_index = current_level_index + 1
 
 	if next_index < levels.size():
-		print("⏭ Cargando nivel", next_index + 1)
+		print("Cargando nivel", next_index + 1)
 		call_deferred("_start_level", next_index)
 	else:
-		print("🎉 Todos los niveles completados. Mostrando WIN")
 		emit_signal("request_save_score")
 		call_deferred("_load_scene", win_scene.instantiate())
 
 func _on_pause_resume():
 	get_tree().paused = false
 	pausa_menu.hide()
+
+func _on_pause_restart():
+	get_tree().paused = false
+	pausa_menu.hide()
+	_start_level(current_level_index)
 
 func _on_pause_exit():
 	get_tree().paused = false
