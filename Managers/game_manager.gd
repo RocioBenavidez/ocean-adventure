@@ -95,10 +95,13 @@ func _on_guide_skipped() -> void:
 func _start_level(index: int) -> void:
 	emit_signal("request_add_points", 0)
 	current_level_index = index
-
+	
 	var level = levels[index].instantiate()
 	_load_scene(level)
 
+	if hud_instance:
+		hud_instance.reset_hud()
+	
 	if hud_instance:
 		if hud_instance.has_signal("time_over"):
 			hud_instance.connect("time_over", Callable(self, "_on_time_over"), CONNECT_ONE_SHOT)
