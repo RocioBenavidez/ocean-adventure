@@ -122,7 +122,11 @@ func _on_level_completed() -> void:
 	else:
 		print("🎉 Todos los niveles completados. Mostrando WIN")
 		emit_signal("request_save_score")
-		call_deferred("_load_scene", win_scene.instantiate())
+		call_deferred("change_to_win")
+
+func change_to_win():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://escenas/screens/WinScreen.tscn")
 
 func _on_pause_resume():
 	get_tree().paused = false
@@ -131,7 +135,7 @@ func _on_pause_resume():
 func _on_pause_exit():
 	get_tree().paused = false
 	pausa_menu.hide()
-	_load_scene(menu_scene.instantiate())
+	get_tree().change_scene_to_file("res://escenas/UI/menu.tscn")
 
 func _toggle_pause():
 	get_tree().paused = not get_tree().paused
