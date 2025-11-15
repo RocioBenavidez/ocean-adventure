@@ -27,21 +27,19 @@ var current_level_index := 0
 var pausa_menu
 
 func _ready() -> void:
-	# Cargamos el menú principal
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	set_process_input(true)
+
 	var menu = menu_scene.instantiate()
 	_load_scene(menu)
-	print("Menú cargado correctamente")
-
+	
 	await get_tree().process_frame
-	print("Nodos hijos actuales:", get_tree().root.get_children())
 
-	# Crear UNA SOLA instancia del menú de pausa
 	pausa_menu = pausa_menu_scene.instantiate()
 	add_child(pausa_menu)
 	pausa_menu.hide()
 
 	pausa_menu.resume_pressed.connect(_on_pause_resume)
-	pausa_menu.restart_pressed.connect(_on_pause_restart)
 	pausa_menu.exit_pressed.connect(_on_pause_exit)
 
 func _unhandled_input(event):
@@ -50,7 +48,6 @@ func _unhandled_input(event):
 
 
 func _load_scene(new_scene: Node) -> void:
-	# Diferimos la carga para evitar problemas con physics/scene tree
 	call_deferred("_do_load_scene", new_scene)
 
 func _do_load_scene(new_scene: Node) -> void:
@@ -85,8 +82,6 @@ func _on_guide_skipped() -> void:
 		hud_instance = hud_scene.instantiate()
 		hud_instance.name = "HUD"
 		add_child(hud_instance)
-		print("HUD instanciado luego de la guía")
-
 	_start_level(0)
 
 func _start_level(index: int) -> void:
@@ -96,11 +91,12 @@ func _start_level(index: int) -> void:
 	_load_scene(level)
 	
 	if hud_instance:
-		if hud_instance.has_signal("time_over"):
+		if hud_instance.has_signal("time_over") and not hud_instance.is_connected("time_over", Callable(self, "_on_time_over")):
 			hud_instance.connect("time_over", Callable(self, "_on_time_over"), CONNECT_ONE_SHOT)
-			
-		if hud_instance.has_signal("tiempo_tick"):
+		if hud_instance.has_signal("tiempo_tick") and not hud_instance.is_connected("tiempo_tick", Callable(self, "_on_tiempo_tick")):
 			hud_instance.connect("tiempo_tick", Callable(self, "_on_tiempo_tick"))
+
+
 	
 	if level.has_signal("level_completed"):
 		level.connect("level_completed", Callable(self, "_on_level_completed"))
