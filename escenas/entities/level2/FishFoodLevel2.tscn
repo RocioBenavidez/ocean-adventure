@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp02v1jo0wqjh"]
+
+[ext_resource type="Script" uid="uid://w0tj6ybh4d38" path="res://scripts/entities/fish_food_level_2.gd" id="1_r0fji"]
+[ext_resource type="Texture2D" uid="uid://dyufn2rbyal0g" path="res://assets/food/level2/food3.png" id="2_gy2y0"]
+
+[node name="FishFoodLevel2" type="Area2D"]
+script = ExtResource("1_r0fji")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(195, 112.75)
+scale = Vector2(0.333334, 0.339695)
+texture = ExtResource("2_gy2y0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(191.706, 109.93)
+rotation = 3.15301
+scale = Vector2(0.411323, 0.377158)
+polygon = PackedVector2Array(-59.2287, -15.358, -18.29, -52.9899, 1.07489, -61.1859, -13.2892, -39.7943, 11.1321, -29.4921, 18.5361, -18.9779, 40.1932, -40.4603, 40.4153, -19.2504, 35.581, -16.5386, 35.8031, 4.67126, 40.6651, 4.61075, 40.8872, 25.8206, 16.3549, 4.91345, -0.412384, 28.9865, 4.53293, 36.8796, 21.4668, 28.714, 11.9093, 44.7425, -17.2907, 42.4546, -34.5299, 21.4565, -51.6858, 8.41229, -59.0345, 3.20062)

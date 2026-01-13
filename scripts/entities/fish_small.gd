@@ -1,1 +1,1 @@
-extends "res://scripts/entities/food.gd"
+extends Food  # ✅ Esto solo funciona si hay "class_name Food"

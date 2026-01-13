@@ -1,16 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1wmjii5mr0y3"]
 
-[ext_resource type="Script" uid="uid://dq05g2yttf0yo" path="res://scripts/entities/static_obstacle.gd" id="1_3mbdx"]
+[ext_resource type="Script" uid="uid://dq05g2yttf0yo" path="res://scripts/obstacles/static_obstacle.gd" id="1_3mbdx"]
 
 [node name="StaticObstacle" type="Node2D"]
 script = ExtResource("1_3mbdx")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]

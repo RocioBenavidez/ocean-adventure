@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://e6y6w15ef120"]
+
+[ext_resource type="Script" uid="uid://d05dptgrijn16" path="res://scripts/Screens/game_over_screen.gd" id="1_chx74"]
+[ext_resource type="Texture2D" uid="uid://cshv0radqnj5v" path="res://assets/ui/Game_Over_Life.png" id="1_mrkg2"]
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_chx74")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 2.0
+offset_right = 1159.0
+offset_bottom = 642.0
+texture = ExtResource("1_mrkg2")
+expand_mode = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 988.0
+offset_top = 37.0
+offset_right = 1109.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 30
+text = "VOLVER"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

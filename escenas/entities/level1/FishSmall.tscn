@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://qygts4c5l1p3"]
+
+[ext_resource type="Script" uid="uid://bpao5uqtkji0m" path="res://scripts/entities/fish_small.gd" id="1_6u7wj"]
+[ext_resource type="Texture2D" uid="uid://botvsx5mrtncm" path="res://assets/food/level1/foodlevel1000.png" id="2_wvym6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2v4r"]
+radius = 17.2621
+height = 39.9691
+
+[node name="FishSmall" type="Area2D"]
+position = Vector2(262, 202)
+script = ExtResource("1_6u7wj")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-108, -90)
+rotation = 1.61012
+shape = SubResource("CapsuleShape2D_h2v4r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-108.477, -91.839)
+rotation = -0.0122341
+scale = Vector2(0.21931, 0.223673)
+texture = ExtResource("2_wvym6")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://g6cqjy2k42q7"]
+
+[ext_resource type="Script" uid="uid://by65pc4d3mtt5" path="res://scripts/Screens/guide.gd" id="1_v1mqv"]
+[ext_resource type="Texture2D" uid="uid://cks5bddcxr7yx" path="res://assets/ui/Guia.png" id="1_wxkxq"]
+
+[sub_resource type="FontVariation" id="FontVariation_wxkxq"]
+
+[node name="Guide" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_v1mqv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 651.0
+texture = ExtResource("1_wxkxq")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1034.0
+offset_top = 592.0
+offset_right = 1148.0
+offset_bottom = 642.0
+theme_override_fonts/font = SubResource("FontVariation_wxkxq")
+theme_override_font_sizes/font_size = 30
+text = "OMITIR"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
