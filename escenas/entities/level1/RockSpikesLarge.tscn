@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://draju8g74l5qq"]
+
+[ext_resource type="Texture2D" uid="uid://bywyemukscq2u" path="res://assets/obstacle/RocaGrande.png" id="1_ber2e"]
+[ext_resource type="Script" uid="uid://dd2h3gupriean" path="res://scripts/obstacles/level1/rock_spikes_large.gd" id="1_ux08o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ux08o"]
+radius = 16.4624
+height = 189.711
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m72es"]
+radius = 17.1211
+height = 190.536
+
+[node name="RockSpikesLarge" type="Node2D"]
+script = ExtResource("1_ux08o")
+damage = 30
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ber2e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+rotation = 1.26545
+shape = SubResource("CapsuleShape2D_ux08o")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.26798
+shape = SubResource("CapsuleShape2D_m72es")

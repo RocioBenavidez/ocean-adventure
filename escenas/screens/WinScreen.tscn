@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5u4vajjvi3x4"]
+
+[ext_resource type="Script" uid="uid://5utdsrxtft7y" path="res://scripts/Screens/win_screen.gd" id="1_o88x1"]
+[ext_resource type="Texture2D" uid="uid://vxl0by035bap" path="res://assets/ui/Win.png" id="1_qqjqm"]
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_o88x1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 662.0
+texture = ExtResource("1_qqjqm")
+expand_mode = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 998.0
+offset_top = 29.0
+offset_right = 1119.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 30
+text = "VOLVER"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 554.0
+offset_top = 465.0
+offset_right = 657.0
+offset_bottom = 517.0
+theme_override_font_sizes/font_size = 30
+text = "SCORE:"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

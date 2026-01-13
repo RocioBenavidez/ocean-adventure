@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://car0nyp3vhhan"]
+
+[ext_resource type="Script" uid="uid://c3jtkw2w7di5m" path="res://scripts/obstacles/level2/fish_enemy_level_2.gd" id="1_cinf0"]
+[ext_resource type="Texture2D" uid="uid://cxklda4nxyr5m" path="res://assets/obstacle/tiburonGris.png" id="2_fg62s"]
+
+[node name="FishEnemyLevel2" type="Node2D"]
+script = ExtResource("1_cinf0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.338945, 0.359606)
+texture = ExtResource("2_fg62s")
+offset = Vector2(-443, -465)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-292, -174, -201, -200, -178, -227, -167, -197, -75, -175, -14, -218, -60, -166, -55, -140, -86, -164, -202, -150, -199, -105, -229, -148)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-290, -179, -195, -201, -179, -227, -163, -198, -75, -178, -12, -218, -58, -164, -55, -137, -98, -158, -198, -145, -201, -104, -232, -144)

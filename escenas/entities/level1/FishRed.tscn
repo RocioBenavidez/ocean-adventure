@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6p0a80mtdxs4"]
+
+[ext_resource type="Script" uid="uid://cfi4177bxu4en" path="res://scripts/obstacles/level1/fish_red.gd" id="1_bio5m"]
+[ext_resource type="Texture2D" uid="uid://baeh6mo2hu2k1" path="res://assets/obstacle/tiburon.png" id="2_iq6r4"]
+
+[node name="FishRed" type="Node2D"]
+script = ExtResource("1_bio5m")
+speed = 200.0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.37449, 0.438776)
+texture = ExtResource("2_iq6r4")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(197, 173)
+scale = Vector2(0.796915, 0.737994)
+polygon = PackedVector2Array(-358.884, -205.964, -242.184, -313.011, -244.697, -255.793, -189.484, -232.758, -141.8, -265.278, -159.368, -212.432, -149.329, -173.136, -189.484, -196.172, -224.619, -181.267, -204.542, -160.941, -240.929, -154.473, -248.461, -171.781, -321.239, -165.313)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(199, 277)
+polygon = PackedVector2Array(-299, -253, -196, -339, -194, -291, -159, -287, -109, -300, -127, -256, -114, -229, -156, -243, -164, -233, -160, -214, -192, -214, -201, -229, -229, -226, -228.577, -215.212, -241, -209, -241, -227, -266, -227)

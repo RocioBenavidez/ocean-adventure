@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://by7upjxxugctk"]
+
+[ext_resource type="Script" uid="uid://cjfcw03pq8c4d" path="res://scripts/UI/menu.gd" id="1_rpkiu"]
+[ext_resource type="Texture2D" uid="uid://b8sx4eq7uwavw" path="res://assets/ui/Aventura en el Océano.png" id="2_brffn"]
+[ext_resource type="PackedScene" uid="uid://pu1iukc3m7ta" path="res://escenas/UI/Ranking.tscn" id="3_dgj5e"]
+
+[sub_resource type="SystemFont" id="SystemFont_rscdm"]
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6l3ks"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d7r87"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="menu" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 584.0
+offset_top = 623.0
+offset_right = 584.0
+offset_bottom = 623.0
+script = ExtResource("1_rpkiu")
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+clip_contents = true
+layout_mode = 1
+offset_left = -584.0
+offset_top = -619.0
+offset_right = 567.0
+offset_bottom = 24.0
+texture = ExtResource("2_brffn")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -117.5
+offset_top = -175.0
+offset_right = 117.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 21
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_rscdm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_6l3ks")
+text = "NOMBRE:"
+
+[node name="name_input" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_d7r87")
+text = "JUGAR"
+
+[node name="Ranking" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_d7r87")
+text = "RANKING"
+
+[node name="Ranking" parent="." instance=ExtResource("3_dgj5e")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = -291.0
+offset_top = -644.0
+offset_right = 260.0
+offset_bottom = 46.0
+grow_vertical = 1
+
+[connection signal="pressed" from="VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Ranking" to="." method="_on_ranking_pressed"]

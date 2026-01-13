@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtjgfassyjfni"]
+
+[ext_resource type="Script" uid="uid://cy21tet7xpfmn" path="res://scripts/obstacles/level1/fish_enemy_2.gd" id="1_i1jl0"]
+[ext_resource type="Texture2D" uid="uid://dn82u2mn2eboj" path="res://assets/obstacle/Enemy2.png" id="2_pfrv0"]
+
+[node name="FishEnemy2" type="Node2D"]
+script = ExtResource("1_i1jl0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.141113, 0.156738)
+texture = ExtResource("2_pfrv0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-50, -1, -39, -26, -11, -39, 7, -66, 25, -68, 34, -26, 41, -3, 63, -12, 58, 33, 42, 20, 30, 33, 35, 55, 9, 40, -40, 55, -61, 34)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-53, -7, -43, -26, -7, -43, 1, -69, 29, -66, 41, -3, 63, -16, 58, 29, 43, 21, 35, 30, 36, 55, 6, 44, -39, 57, -66, 35)

@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://pu1iukc3m7ta"]
+
+[ext_resource type="Script" uid="uid://xvbi2pnqjw14" path="res://scripts/UI/ranking.gd" id="1_1yuov"]
+[ext_resource type="Texture2D" uid="uid://72i06ukqq1oj" path="res://assets/ui/Ranking1.png" id="2_1yuov"]
+
+[sub_resource type="Theme" id="Theme_a0dpm"]
+
+[node name="Ranking" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_1yuov")
+
+[node name="Panel" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -197.0
+offset_top = 36.0
+offset_right = 195.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_a0dpm")
+texture = ExtResource("2_1yuov")
+expand_mode = 1
+metadata/_edit_group_ = true
+
+[node name="ScoreList" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -83.0
+offset_right = 120.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.724
+offset_left = -57.0
+offset_top = 215.0
+offset_right = 64.0
+offset_bottom = 139.112
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "VOLVER"

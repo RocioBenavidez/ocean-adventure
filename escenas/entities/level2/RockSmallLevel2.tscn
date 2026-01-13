@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq5ciynalkcmq"]
+
+[ext_resource type="Script" uid="uid://dcwt5iatmmj5q" path="res://scripts/obstacles/level2/rock_small_level_2.gd" id="1_diuuw"]
+[ext_resource type="Texture2D" uid="uid://cmrnj7rsxauuf" path="res://assets/obstacle/obstaculo2level2.png" id="1_qtsu8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_diuuw"]
+radius = 20.3018
+height = 70.6208
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gq4bo"]
+radius = 23.3911
+height = 71.0795
+
+[node name="RockSmallLevel2" type="Node2D"]
+script = ExtResource("1_diuuw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(128.5, 76.75)
+scale = Vector2(0.990385, 0.995146)
+texture = ExtResource("1_qtsu8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(128, 78)
+rotation = -0.833654
+shape = SubResource("CapsuleShape2D_diuuw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(126, 79)
+rotation = 2.3237
+shape = SubResource("CapsuleShape2D_gq4bo")
